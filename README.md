@@ -13,8 +13,9 @@ Usuário).
 
  - Pedro Brasil - PedroHBrasil
  - Leonardo Paiva - LeonardoPaiv
- - João Vitor
- - Silvino
+ - João Vitor - 
+ - Silvino - Psnsilvino
+ - Pedro Alvares - MasterCabral
 
 ### Gerenciamento de Tarefas
 
