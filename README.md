@@ -101,3 +101,7 @@ professor.
  multiplicada por 2 por um tempo.
  - [ ] **Menu de Pause:** Opções de reiniciar, finalizar e visualizar
  ranking.
+
+### Leonardo
+
+ - [ ] **Versus** Ser um jogo de dois jogadores com displey horizontal
