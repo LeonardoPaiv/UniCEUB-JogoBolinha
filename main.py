@@ -39,6 +39,7 @@ velocidade = 5
 bateu = True
 continuar = True
 while continuar:
+    print('conflito com pedro')
     if bateu:
         passo = random.randrange(1, 10)
         if random.random() < 0.5:
