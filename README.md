@@ -102,11 +102,11 @@ professor.
  - [ ] **Menu de Pause:** Opções de reiniciar, finalizar e visualizar
  ranking.
 
-### Leonardo
+#### Leonardo
 
  - [ ] **Versus** Ser um jogo de dois jogadores com display horizontal
 
-### Silvino
+#### Silvino
 
  - [ ] **Mudança do Tamanho da Barra:** O tamanho da barra diminui ao marcar um ponto e aumenta ao tomar um ponto, mas não passa do tamanho original
  - [ ] **Botão de Restart:** Botão para nao ter que reiniciar o código sempre que perder
