@@ -12,7 +12,7 @@ Lista com nomes das pessoas e nomes de usuário no Github (Nome - Nome de
 Usuário).
 
  - Pedro Brasil - PedroHBrasil
- - Leonardo Paiva - LeonardoPaiv
+ - João Patinhonardo Paiva - João PatinhonardoPaiv
  - João Vitor - 
  - Silvino - Psnsilvino
  - Pedro Alvares - MasterCabral
@@ -55,19 +55,19 @@ Recursos e ideias para o jogo.
 
 Os requisitos impostos pelo professor são:
 
- - [ ] O jogo tem uma bolinha que deve se movimentar verticalmente em
+ - O jogo tem uma bolinha que deve se movimentar verticalmente em
  uma certa velocidade.
- - [ ] O deslocamento horizontal deve ser variado (random).
- - [ ] Usamos as setas direita e esquerda para movimentar a barra
+ - O deslocamento horizontal deve ser variado (random).
+ - Usamos as setas direita e esquerda para movimentar a barra
  inferior.
- - [ ] O objetivo do jogador é não deixar a bolinha cair.
- - [ ] A barra deve ser usada como barreira para a bolinha não cair.
- - [ ] A cada batida da bolinha deve ser sorteado o passo horizontal
+ - O objetivo do jogador é não deixar a bolinha cair.
+ - A barra deve ser usada como barreira para a bolinha não cair.
+ - A cada batida da bolinha deve ser sorteado o passo horizontal
  dela e também sorteado se o passo será positivo (direita) ou negativo
  (esquerda).
- - [ ] A cada toque da bola na barra deve ser aumentado os pontos em 1
+ - A cada toque da bola na barra deve ser aumentado os pontos em 1
  e então mostrado o placar na parte inferior.
- - [ ] A cada conjunto de “x” pontos deve-se definir o grau de
+ - A cada conjunto de “x” pontos deve-se definir o grau de
  dificuldade, ou seja, aumentar o grau de dificuldade, por exemplo
  aumentando a velocidade da bolinha, aumentando o passo lateral
  (direita/esquerda), diminuindo o tamanho da barra, etc.
@@ -77,15 +77,15 @@ Os requisitos impostos pelo professor são:
 Algumas ideias recomendadas pelo professor foram (não obrigatórias, mas
 é bom fazer):
 
- - [ ] Permitir que tenha “n” bolinhas disponíveis para um jogo, por
+ - Permitir que tenha “n” bolinhas disponíveis para um jogo, por
  exemplo: três bolinhas/chances para jogar, assim só termina quando o
  jogador deixa cair três bolinhas.
- - [ ] Que o Jogador dê um nome e então ao final de cada “game” seja
+ - Que o Jogador dê um nome e então ao final de cada “game” seja
  mostrado o nome e a pontuação alcançada.
- - [ ] Que seja especificado um ranking com os três melhores “games”
+ - Que seja especificado um ranking com os três melhores “games”
  com mais pontuação por sessão de execução do programa (não precisa
  guardar em arquivo, só memória ram).
- - [ ] Entre outras possíveis funções ou melhoramentos.
+ - Entre outras possíveis funções ou melhoramentos.
 
 ### Ideias dos Membros
 
@@ -96,17 +96,74 @@ professor.
 
 #### Pedro Brasil
 
- - [ ] **PowerUp:** PowerUp aparece por um tempo na tela e após poucos
+ - **PowerUp:** PowerUp aparece por um tempo na tela e após poucos
  segundos desaparece. Se a bolinha bater no PowerUp, a pontuação é
  multiplicada por 2 por um tempo.
- - [ ] **Menu de Pause:** Opções de reiniciar, finalizar e visualizar
+ - **Menu de Pause:** Opções de reiniciar, finalizar e visualizar
  ranking.
 
-#### Leonardo
+#### João Patinhonardo
 
- - [ ] **Versus** Ser um jogo de dois jogadores com display horizontal
+ - **Versus** Ser um jogo de dois jogadores com display horizontal
 
 #### Silvino
 
- - [ ] **Mudança do Tamanho da Barra:** O tamanho da barra diminui ao marcar um ponto e aumenta ao tomar um ponto, mas não passa do tamanho original
- - [ ] **Botão de Restart:** Botão para nao ter que reiniciar o código sempre que perder
+ - **Mudança do Tamanho da Barra:** O tamanho da barra diminui ao marcar um ponto e aumenta ao tomar um ponto, mas não passa do tamanho original
+ - **Botão de Restart:** Botão para nao ter que reiniciar o código sempre que perder
+
+ #### Cabral
+
+ - **Round Bricks by Bricks:** Round surpresa em que aparecem uns blocos para cada jogador bater e eliminar. O jogador que terminar os blocos primeiro ganha o ponto.
+
+ #### João PATO
+
+ - Pagar um lanche pra gente seu sumido safado.
+
+ ## Tarefas
+
+ - [ ] Tornar o jogo horizontal ao invés de vertical. (Silvino: DEITAR O JOGO)
+  - Leo
+ - [ ] Resetar bolinha a cada vez que ela passa do limite da tela.
+  - Leo
+ - [ ] Adicionar jogador (versus)
+  - Leo
+ - [ ] Implementar sistema de pontuação. Um ponto a cada gol.
+  - Leo
+ - [ ] Implementar final do jogo após X pontos.
+  - Leo
+ - [ ] Implementar menu de pause quando apertar ESC.
+  - Silvino
+ - [ ] Implementar botões do menu de pause (Resumir, Reiniciar e Sair)
+  - Silvino
+ - [ ] Implementar funcionalidade "Resumir".
+  - Silvino
+ - [ ] Implementar funcionalidade "Reiniciar".
+  - Silvino
+ - [ ] Implementar funcionalidade "Sair".
+  - Silvino
+ - [ ] Adicionar tela: Parabéns, jogador i ganhou.
+  - Silvino
+ - [ ] Variação do tamanho da barra a cada ponto. A cada ponto tomado, a barra aumenta e a cada ponto feito, a barra diminui.
+  - João Patinho
+ - [ ] Aumento da velocidade da bolinha a cada rebatida. Velocidade reseta quando troca o round.
+  - João Patinho
+ - [ ] Diminuir tamanho da bolinha a cada round.
+  - João Patinho
+ - [ ] Round bricks by bricks: Adicionar função para adicionar blocos no campo do jogador.
+  - Cabral
+ - [ ] Round bricks by bricks: Adicionar função para eliminar blocos em colisão.
+  - Cabral
+ - [ ] Round bricks by bricks: Implementar pontuação (quando os blocos acabam, o jogador leva o ponto do round).
+  - Cabral
+ - [ ] Round bricks by bricks: Implementar round no decorrer do jogo (round aleatório a partir da pontuação Y).
+  - Cabral
+ - [ ] Adicionar cantos arredondados nas barras.
+  - João Patinho
+ - [ ] Implementar mudança de trajetória da bolinha com base no vetor normal à superfície da barra (manter certo nível de aleatoriedade para garantir que ela não fique estagnada).
+  - João Patinho
+ - [ ] Implementar efeitos sonoros.
+  - Pedro Brasil
+ - [ ] MELHORAR O DESIGN (esquema de cores). 
+  - Pedro Brasil
+ - [ ] Ajudar geral
+  - Pedro Brasil
