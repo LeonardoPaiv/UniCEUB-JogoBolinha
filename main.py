@@ -1,5 +1,8 @@
 from graphics import *
 import random
+from playsound import playsound
+import os
+import threading
 
 win = GraphWin("Bolinha ...", 800, 600)
 
@@ -52,6 +55,17 @@ while continuar:
         velocidade = -velocidade
 
     if lin == 515 and col > colIni and col < (colIni+tamanho):
+        # Plays sound when ball hits bar
+        sound_file_path = os.path.join(
+            os.getcwd(),
+            "ball_hit_bar.wav"
+        )
+        threading.Thread(
+            target=playsound,
+            args=(sound_file_path,),
+            daemon=True
+            ).start()
+        
         velocidade = -velocidade
 
     # Nova posição do círculo
