@@ -104,4 +104,9 @@ professor.
 
 ### Leonardo
 
- - [ ] **Versus** Ser um jogo de dois jogadores com displey horizontal
+ - [ ] **Versus** Ser um jogo de dois jogadores com display horizontal
+
+### Silvino
+
+ - [ ] **Mudança do Tamanho da Barra:** O tamanho da barra diminui ao marcar um ponto e aumenta ao tomar um ponto, mas não passa do tamanho original
+ - [ ] **Botão de Restart:** Botão para nao ter que reiniciar o código sempre que perder
