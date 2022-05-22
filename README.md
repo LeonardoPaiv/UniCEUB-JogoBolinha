@@ -110,3 +110,11 @@ professor.
 
  - [ ] **Mudança do Tamanho da Barra:** O tamanho da barra diminui ao marcar um ponto e aumenta ao tomar um ponto, mas não passa do tamanho original
  - [ ] **Botão de Restart:** Botão para nao ter que reiniciar o código sempre que perder
+
+ #### Cabral
+
+ - [ ] **Round Bricks by Bricks:** Round surpresa em que aparecem uns blocos para cada jogador bater e eliminar. O jogador que terminar os blocos primeiro ganha o ponto.
+
+ #### João PATO
+
+ - [ ] Pagar um lanche pra gente seu sumido safado.
