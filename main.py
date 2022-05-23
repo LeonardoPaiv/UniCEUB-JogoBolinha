@@ -1,3 +1,4 @@
+from pyparsing import line
 from graphics import *
 import random
 
@@ -41,6 +42,20 @@ barra = Line(Point(colIni, 530), Point(colIni+tamanho, 530))
 barra.setFill(color_rgb(100, 10, 10))
 barra.setWidth(10)
 barra.draw(win)
+
+
+linha_Barra_Esquerda = 200
+barra_Esquerda = Line(Point(10, linha_Barra_Esquerda), Point(10, linha_Barra_Esquerda + 100))
+barra_Esquerda.setFill(color_rgb(100, 10, 10))
+barra_Esquerda.setWidth(10)
+barra_Esquerda.draw(win)
+
+linha_Barra_Direita = 200
+barra_Direita = Line(Point(1590, linha_Barra_Direita), Point(1590, linha_Barra_Direita + 100))
+barra_Direita.setFill(color_rgb(100, 10, 10))
+barra_Direita.setWidth(10)
+barra_Direita.draw(win)
+
 
 velocidade = 5
 bateu = True
@@ -102,7 +117,49 @@ while continuar:
         barra.setFill(color_rgb(100, 10, 10))
         barra.setWidth(10)
         barra.draw(win)
+        print(colIni)
 
+    if tecla == "Up":
+        if (linha_Barra_Esquerda - 15) > 35:
+            linha_Barra_Esquerda -= 17
+
+        barra_Esquerda.undraw()
+        barra_Esquerda = Line(Point(10, linha_Barra_Esquerda), Point(10, linha_Barra_Esquerda + 100))
+        barra_Esquerda.setFill(color_rgb(100, 10, 10))
+        barra_Esquerda.setWidth(10)
+        barra_Esquerda.draw(win)
+
+    if tecla == "Down":
+        if (linha_Barra_Esquerda + 15) < 450:
+            linha_Barra_Esquerda += 17
+ 
+        barra_Esquerda.undraw()
+        barra_Esquerda =Line(Point(10, linha_Barra_Esquerda), Point(10, linha_Barra_Esquerda + 100))
+        barra_Esquerda.setFill(color_rgb(100, 10, 10))
+        barra_Esquerda.setWidth(10)
+        barra_Esquerda.draw(win)
+    
+    if tecla == "W" or tecla ==  "w":
+        if (linha_Barra_Direita - 15) > 35:
+            linha_Barra_Direita -= 17
+        
+        barra_Direita.undraw()
+        barra_Direita = Line(Point(1590, linha_Barra_Direita), Point(1590, linha_Barra_Direita + 100))
+        barra_Direita.setFill(color_rgb(100, 10, 10))
+        barra_Direita.setWidth(10)
+        barra_Direita.draw(win)
+
+    if tecla == "S" or tecla == "s":
+        if (linha_Barra_Direita + 15) < 450:
+            linha_Barra_Direita += 17
+ 
+        barra_Direita.undraw()
+        barra_Direita =Line(Point(1590, linha_Barra_Direita), Point(1590, linha_Barra_Direita + 100))
+        barra_Direita.setFill(color_rgb(100, 10, 10))
+        barra_Direita.setWidth(10)
+        barra_Direita.draw(win)
+
+    
     # Esperar o ser humano reagir
     time.sleep(.07)
 
