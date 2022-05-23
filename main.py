@@ -1,86 +1,127 @@
 from pyparsing import line
 from graphics import *
 import random
+import time
 
 win = GraphWin("Bolinha ...", 1600, 600)
 
+# Limite superior
 linhaSuperior = Line(Point(0, 40), Point(1600, 40))
 linhaSuperior.setWidth(10)
 linhaSuperior.setFill(color_rgb(10, 100, 10))
 linhaSuperior.draw(win)
 
+# Limite inferior
 linhaInferior = Line(Point(0, 550), Point(1600, 550))
 linhaInferior.setWidth(10)
 linhaInferior.setFill(color_rgb(10, 100, 10))
 linhaInferior.draw(win)
 
-col = 390
-lin = 80
+# Bolhinha
+col = 800
+lin = 300
 raio = 15
 circulo = Circle(Point(col, lin), raio)
 circulo.setFill(color_rgb(10, 10, 100))
 circulo.draw(win)
 
+# regua testes
+#regua = Line(Point(0,40), Point(15,40))
+#regua.draw(win)
+
 # Sistema de pontuação
+pontos01 = 0
+pontos02 = 0
+placar = Text(Point(800, 300), str(pontos01) + ' : ' + str(pontos02))
+placar.setSize(30)
+placar.draw(win)
 
-#def placar(pts_p1, pts_p2, soma1, soma2):
-#    pts_p1 += soma1
-#    pts_p2 += soma2
-#    Start_Score = Text(Point(800, 300), str(pts_p1) + ' : ' + str(pts_p2))
-#    Start_Score.setSize(30)
-#    Start_Score.draw(win)
-#
-## Placar inicial
-#placar(0, 0, 0, 0)
-
-
-    
-
-colIni = 340
-tamanho = 100
-barra = Line(Point(colIni, 530), Point(colIni+tamanho, 530))
-barra.setFill(color_rgb(100, 10, 10))
-barra.setWidth(10)
-barra.draw(win)
-
-
-linha_Barra_Esquerda = 200
+# Barra esquerda
+linha_Barra_Esquerda = 205
 barra_Esquerda = Line(Point(10, linha_Barra_Esquerda), Point(10, linha_Barra_Esquerda + 100))
 barra_Esquerda.setFill(color_rgb(100, 10, 10))
 barra_Esquerda.setWidth(10)
 barra_Esquerda.draw(win)
 
-linha_Barra_Direita = 200
+# Barra direita
+linha_Barra_Direita = 205
 barra_Direita = Line(Point(1590, linha_Barra_Direita), Point(1590, linha_Barra_Direita + 100))
 barra_Direita.setFill(color_rgb(100, 10, 10))
 barra_Direita.setWidth(10)
 barra_Direita.draw(win)
 
+'''
+o que significa cada variável:
+Passo = velocidade lateral da bolhinha
+velocidade = velocidade vertical da bolhinha
+bateu = eu usei para aleatoriedade quando resetar
 
-velocidade = 5
+Para mexer com a fisíca na lateral da bolhinha tem que pegar os dados de "col" usando print(col) e vendo no console
+Para mexer com a fisíca na verical da bolhinha tem que pegar os dados de "lin" usando print(col) e vendo no console
+'''
+velocidade = 10
 bateu = True
 continuar = True
 while continuar:
     if bateu:
-        passo = random.randrange(1, 10)
+        passo = 30#random.randrange(5, 10)
         if random.random() < 0.5:
             passo = -passo
         bateu = False
-
-    if (col + raio + passo) > 1600:
+    print('posições: ',col)
+    #Ponto para o player 1
+    if (col + raio + passo) > 1650:
         passo = -passo
+        placar.undraw()
+        pontos01 +=1
+        placar = Text(Point(800, 300), str(pontos01) + ' : ' + str(pontos02))
+        placar.setSize(30)
+        placar.draw(win)
+        
+        # reset da bolhinha
+        circulo.undraw()
+        col = 800
+        lin = 300
+        raio = 15
+        circulo = Circle(Point(col, lin), raio)
+        circulo.setFill(color_rgb(10, 10, 100))
+        circulo.draw(win)
+        bateu = True
 
-    if (col - raio + passo) < 0:
+    #Ponto para o player 2
+    if (col - raio + passo) < -50:
         passo = -passo
+        placar.undraw()
+        pontos02 +=1
+        placar = Text(Point(800, 300), str(pontos01) + ' : ' + str(pontos02))
+        placar.setSize(30)
+        placar.draw(win)
 
+        # reset da bolhinha
+        circulo.undraw()
+        col = 800
+        lin = 300
+        raio = 15
+        circulo = Circle(Point(col, lin), raio)
+        circulo.setFill(color_rgb(10, 10, 100))
+        circulo.draw(win)
+        bateu = True
+
+    # Altera a direção vertical quando bate em cima
     if lin < 65:
         velocidade = -velocidade
 
+    # Altera a direção vertical quando bate embaixo
     if lin > 525:
         velocidade = - velocidade
 
-    if lin == 515 and col > colIni and col < (colIni+tamanho):
-        velocidade = -velocidade
+    # Colisão com a barra acontece quando a bolhinha está na coluna 20 quando a velocidade lateral é 30
+    if col == 20 and lin > linha_Barra_Esquerda and lin < (linha_Barra_Esquerda + 100):
+        passo = - passo
+
+    # Colisão com a barra acontece quando a bolhinha está na coluna 1580 quando a velocidade lateral é 30
+    if col == 1580 and lin > linha_Barra_Direita and lin < (linha_Barra_Direita + 100):
+        passo = - passo
 
     # Nova posição do círculo
     circulo.undraw()
@@ -98,30 +139,10 @@ while continuar:
         continuar = False
         continue
 
-    if tecla == "Right":
-        if (colIni + 20) < 701:
-            colIni = colIni + 20
-
-        barra.undraw()
-        barra = Line(Point(colIni, 530), Point(colIni + 100, 530))
-        barra.setFill(color_rgb(100, 10, 10))
-        barra.setWidth(10)
-        barra.draw(win)
-
-    if tecla == "Left":
-        if (colIni - 20) > -1:
-            colIni = colIni - 20
-
-        barra.undraw()
-        barra = Line(Point(colIni, 530), Point(colIni + 100, 530))
-        barra.setFill(color_rgb(100, 10, 10))
-        barra.setWidth(10)
-        barra.draw(win)
-        print(colIni)
-
-    if tecla == "Up":
+    # movimento da barra esquerda
+    if tecla == "W" or tecla ==  "w":
         if (linha_Barra_Esquerda - 15) > 35:
-            linha_Barra_Esquerda -= 17
+            linha_Barra_Esquerda -= 40
 
         barra_Esquerda.undraw()
         barra_Esquerda = Line(Point(10, linha_Barra_Esquerda), Point(10, linha_Barra_Esquerda + 100))
@@ -129,9 +150,10 @@ while continuar:
         barra_Esquerda.setWidth(10)
         barra_Esquerda.draw(win)
 
-    if tecla == "Down":
+    # movimento da barra esquerda
+    if tecla == "S" or tecla == "s":
         if (linha_Barra_Esquerda + 15) < 450:
-            linha_Barra_Esquerda += 17
+            linha_Barra_Esquerda += 40
  
         barra_Esquerda.undraw()
         barra_Esquerda =Line(Point(10, linha_Barra_Esquerda), Point(10, linha_Barra_Esquerda + 100))
@@ -139,19 +161,21 @@ while continuar:
         barra_Esquerda.setWidth(10)
         barra_Esquerda.draw(win)
     
-    if tecla == "W" or tecla ==  "w":
+    # movimento da barra Direita
+    if tecla == "Up":
         if (linha_Barra_Direita - 15) > 35:
-            linha_Barra_Direita -= 17
+            linha_Barra_Direita -= 40
         
         barra_Direita.undraw()
         barra_Direita = Line(Point(1590, linha_Barra_Direita), Point(1590, linha_Barra_Direita + 100))
         barra_Direita.setFill(color_rgb(100, 10, 10))
         barra_Direita.setWidth(10)
         barra_Direita.draw(win)
-
-    if tecla == "S" or tecla == "s":
+    
+    # movimento da barra Direita
+    if tecla == "Down":
         if (linha_Barra_Direita + 15) < 450:
-            linha_Barra_Direita += 17
+            linha_Barra_Direita += 40
  
         barra_Direita.undraw()
         barra_Direita =Line(Point(1590, linha_Barra_Direita), Point(1590, linha_Barra_Direita + 100))
