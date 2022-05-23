@@ -1,15 +1,15 @@
 from graphics import *
 import random
 
-win = GraphWin("Bolinha ...", 800, 600)
+win = GraphWin("Bolinha ...", 1600, 600)
 
-linhaSuperior = Line(Point(0, 40), Point(800, 40))
+linhaSuperior = Line(Point(0, 40), Point(1600, 40))
 linhaSuperior.setWidth(10)
 linhaSuperior.setFill(color_rgb(10, 100, 10))
 linhaSuperior.draw(win)
 
-linhaInferior = Line(Point(0, 550), Point(800, 550))
-linhaInferior.setWidth(3)
+linhaInferior = Line(Point(0, 550), Point(1600, 550))
+linhaInferior.setWidth(10)
 linhaInferior.setFill(color_rgb(10, 100, 10))
 linhaInferior.draw(win)
 
@@ -20,10 +20,20 @@ circulo = Circle(Point(col, lin), raio)
 circulo.setFill(color_rgb(10, 10, 100))
 circulo.draw(win)
 
-pts = 0
-pontos = Text(Point(400, 575), "Pontos: " + str(pts))
-pontos.setSize(14)
-pontos.draw(win)
+# Sistema de pontuação
+
+#def placar(pts_p1, pts_p2, soma1, soma2):
+#    pts_p1 += soma1
+#    pts_p2 += soma2
+#    Start_Score = Text(Point(800, 300), str(pts_p1) + ' : ' + str(pts_p2))
+#    Start_Score.setSize(30)
+#    Start_Score.draw(win)
+#
+## Placar inicial
+#placar(0, 0, 0, 0)
+
+
+    
 
 colIni = 340
 tamanho = 100
@@ -42,7 +52,7 @@ while continuar:
             passo = -passo
         bateu = False
 
-    if (col + raio + passo) > 800:
+    if (col + raio + passo) > 1600:
         passo = -passo
 
     if (col - raio + passo) < 0:
@@ -50,6 +60,9 @@ while continuar:
 
     if lin < 65:
         velocidade = -velocidade
+
+    if lin > 525:
+        velocidade = - velocidade
 
     if lin == 515 and col > colIni and col < (colIni+tamanho):
         velocidade = -velocidade
