@@ -7,6 +7,7 @@ import os
 import threading
 
 
+win = GraphWin("Bolinha ...", 1600, 600)
 
 # Tela de final do jogo quando player 1 vence
 def vitoria_player1(win):
@@ -48,8 +49,10 @@ def vitoria_player1(win):
             jogar_outra_vez = False
             
         if tecla == 'Return' and jogar_outra_vez == True:
-            win.close()
-            jogo(0,0)
+            texto_vitoria.undraw()
+            jogar_novamente.undraw()
+            sair.undraw()
+            jogo(0,0, win)
             
 
         if tecla == 'Return' and jogar_outra_vez == False:
@@ -100,8 +103,10 @@ def vitoria_player2(win):
             jogar_outra_vez = False
             
         if tecla == 'Return' and jogar_outra_vez == True:
-            win.close()
-            jogo(0,0)
+            texto_vitoria.undraw()
+            jogar_novamente.undraw()
+            sair.undraw()
+            jogo(0,0, win)
             
 
         if tecla == 'Return' and jogar_outra_vez == False:
@@ -110,8 +115,8 @@ def vitoria_player2(win):
 
 
 
-def jogo(ponto_player1, ponto_player2):
-    win = GraphWin("Bolinha ...", 1600, 600)
+def jogo(ponto_player1, ponto_player2, win):
+
 
     # Limite superior
     linhaSuperior = Line(Point(0, 40), Point(1600, 40))
@@ -387,8 +392,17 @@ def jogo(ponto_player1, ponto_player2):
                         
                     # Caso o seletor seja = 2 nada acontece, está para programar
                     if tecla == "Return" and seletor == 2:
-                        win.close()
-                        jogo(0,0)
+                        linhaSuperior.undraw()
+                        linhaInferior.undraw()
+                        circulo.undraw()
+                        barra_Direita.undraw()
+                        barra_Esquerda.undraw()
+                        placar.undraw()
+                        stop.undraw()
+                        continuar.undraw()
+                        reiniciar.undraw()
+                        sair.undraw()
+                        jogo(0,0, win)
                                             
                     # Caso o seletor seja = 1 e precinem Enter, o jogo fecha
                     if tecla == "Return" and seletor == 1:
@@ -423,4 +437,4 @@ def jogo(ponto_player1, ponto_player2):
 
 
 
-jogo(0,0)
+jogo(0,0, win)
