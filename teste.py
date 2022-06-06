@@ -28,8 +28,6 @@ def vitoria_player1(win):
 
         tecla = win.getKey()
 
-        contador = None
-
         if tecla == "Up":
             jogar_novamente.undraw()
             jogar_novamente.setSize(30)
@@ -297,13 +295,110 @@ def jogo(ponto_player1, ponto_player2):
             barra_Direita.setWidth(10)
             barra_Direita.draw(win)
         
-
+        # PAUSE, a lógica ficou mais complexa com 3 opções, caso precise só de continuar e sair,
+        # dá para usar a mesma lógica da tela do final do jogo
         if tecla == 'Escape':
-            pause = Text(Point(800, 400), 'Jogo Pausado, pressione qualquer coisa para continuar')
-            pause.setSize(30)
-            pause.draw(win)
-            continuar = win.getKey()
-            pause.undraw()
+
+            def pause():
+                # Texto de Pause
+                stop = Text(Point(800, 400), 'Jogo Pausado, pressione qualquer coisa para continuar')
+                stop.setSize(30)
+                stop.draw(win)
+                
+                # Para lógica de selecionar o botão preenchido
+                seletor = 2
+                
+                # Botão continuar
+                continuar = Text(Point(600, 500), 'Continuar')
+                continuar.setSize(25)
+                continuar.draw(win)
+
+                # Botão vazio
+                botao = Text(Point(800, 500), 'Botão')
+                botao.setSize(25)
+                botao.draw(win)
+
+                # Botão de sair
+                sair = Text(Point(1000, 500), 'Sair')
+                sair.setSize(25)
+                sair.draw(win)
+
+                # Loop de Pause
+                pause = True
+                while pause:
+
+                    # Registro de tecla para o loop não travar jogo
+                    tecla = win.getKey()
+
+                    # Navegação do seletor pela tela
+                    if tecla == "Left" and seletor < 3:
+                        seletor += 1
+                            
+                    # Navegação do seletor pela tela
+                    if tecla == "Right" and seletor > 1:
+                        seletor -= 1
+                    
+                    # Continuar fica com a font 30 para demonstrar que o seletor está nele. seletor = 3
+                    if seletor == 3:
+                        continuar.undraw()
+                        continuar.setSize(30)
+                        continuar.draw(win)
+
+                        botao.undraw()
+                        botao.setSize(25)
+                        botao.draw(win)
+
+                        sair.undraw()
+                        sair.setSize(25)
+                        sair.draw(win)
+
+                    # Botão fica com a font 30 para demonstrar que o seletor está nele. seletor = 2
+                    if seletor == 2:
+                        continuar.undraw()
+                        continuar.setSize(25)
+                        continuar.draw(win)
+
+                        botao.undraw()
+                        botao.setSize(30)
+                        botao.draw(win)
+
+                        sair.undraw()
+                        sair.setSize(25)
+                        sair.draw(win)
+                    
+                    # Sair fica com a font 30 para demonstrar que o seletor está nele. seletor = 1
+                    if seletor == 1:
+                        continuar.undraw()
+                        continuar.setSize(25)
+                        continuar.draw(win)
+
+                        botao.undraw()
+                        botao.setSize(25)
+                        botao.draw(win)
+
+                        sair.undraw()
+                        sair.setSize(30)
+                        sair.draw(win)
+
+
+                    # Caso o seletor seja = 3 e precinem Enter, o jogo sai do pause
+                    if tecla == 'Return' and seletor == 3:
+                        pause = False
+                        
+                    # Caso o seletor seja = 2 nada acontece, está para programar
+                    if tecla == "Return" and seletor == 2:
+                        a = 'nada acontece'
+                    
+                    # Caso o seletor seja = 1 e precinem Enter, o jogo fecha
+                    if tecla == "Return" and seletor == 1:
+                        win.close()
+                
+                stop.undraw()
+                continuar.undraw()
+                botao.undraw()
+                sair.undraw()
+            
+            pause()
         
         if ponto_player1 == 10:
             placar.undraw()
