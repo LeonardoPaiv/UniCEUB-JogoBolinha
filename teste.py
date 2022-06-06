@@ -10,6 +10,7 @@ import threading
 
 # Tela de final do jogo quando player 1 vence
 def vitoria_player1(win):
+
     texto_vitoria = Text(Point(800, 300), 'Jogador Numero 1 venceu')
     texto_vitoria.setSize(30)
     texto_vitoria.draw(win)
@@ -36,7 +37,7 @@ def vitoria_player1(win):
             sair.undraw()
             sair.setSize(25)
             sair.draw(win)
-            contador = 'a'
+            jogar_outra_vez = True
 
 
         if tecla == "Down":
@@ -46,14 +47,14 @@ def vitoria_player1(win):
             jogar_novamente.undraw()
             jogar_novamente.setSize(25)
             jogar_novamente.draw(win)
-            contador = 'b'
+            jogar_outra_vez = False
             
-        if tecla == 'Return':
+        if tecla == 'Return' and jogar_outra_vez == True:
             win.close()
             jogo(0,0)
             
 
-        if tecla == 'Escape':
+        if tecla == 'Return' and jogar_outra_vez == False:
             menu = False
             win.close()
             
@@ -61,6 +62,7 @@ def vitoria_player1(win):
         
 # Tela de final do jogo qunado player 2 vence
 def vitoria_player2(win):
+
     texto_vitoria = Text(Point(800, 300), '''Jogador Numero 2 venceu''')
     texto_vitoria.setSize(30)
     texto_vitoria.draw(win)
@@ -87,7 +89,7 @@ def vitoria_player2(win):
             sair.undraw()
             sair.setSize(25)
             sair.draw(win)
-            contador = 'a'
+            jogar_outra_vez = True
 
 
         if tecla == "Down":
@@ -97,14 +99,14 @@ def vitoria_player2(win):
             jogar_novamente.undraw()
             jogar_novamente.setSize(25)
             jogar_novamente.draw(win)
-            contador = 'b'
+            jogar_outra_vez = False
             
-        if tecla == 'Return':
+        if tecla == 'Return' and jogar_outra_vez == True:
             win.close()
             jogo(0,0)
             
 
-        if tecla == 'Escape':
+        if tecla == 'Return' and jogar_outra_vez == False:
             menu = False
             win.close()
 
