@@ -314,9 +314,9 @@ def jogo(ponto_player1, ponto_player2):
                 continuar.draw(win)
 
                 # Botão vazio
-                botao = Text(Point(800, 500), 'Botão')
-                botao.setSize(25)
-                botao.draw(win)
+                reiniciar = Text(Point(800, 500), 'Reiniciar')
+                reiniciar.setSize(25)
+                reiniciar.draw(win)
 
                 # Botão de sair
                 sair = Text(Point(1000, 500), 'Sair')
@@ -344,9 +344,9 @@ def jogo(ponto_player1, ponto_player2):
                         continuar.setSize(30)
                         continuar.draw(win)
 
-                        botao.undraw()
-                        botao.setSize(25)
-                        botao.draw(win)
+                        reiniciar.undraw()
+                        reiniciar.setSize(25)
+                        reiniciar.draw(win)
 
                         sair.undraw()
                         sair.setSize(25)
@@ -358,9 +358,9 @@ def jogo(ponto_player1, ponto_player2):
                         continuar.setSize(25)
                         continuar.draw(win)
 
-                        botao.undraw()
-                        botao.setSize(30)
-                        botao.draw(win)
+                        reiniciar.undraw()
+                        reiniciar.setSize(30)
+                        reiniciar.draw(win)
 
                         sair.undraw()
                         sair.setSize(25)
@@ -372,9 +372,9 @@ def jogo(ponto_player1, ponto_player2):
                         continuar.setSize(25)
                         continuar.draw(win)
 
-                        botao.undraw()
-                        botao.setSize(25)
-                        botao.draw(win)
+                        reiniciar.undraw()
+                        reiniciar.setSize(25)
+                        reiniciar.draw(win)
 
                         sair.undraw()
                         sair.setSize(30)
@@ -387,15 +387,16 @@ def jogo(ponto_player1, ponto_player2):
                         
                     # Caso o seletor seja = 2 nada acontece, está para programar
                     if tecla == "Return" and seletor == 2:
-                        a = 'nada acontece'
-                    
+                        win.close()
+                        jogo(0,0)
+                                            
                     # Caso o seletor seja = 1 e precinem Enter, o jogo fecha
                     if tecla == "Return" and seletor == 1:
                         win.close()
                 
                 stop.undraw()
                 continuar.undraw()
-                botao.undraw()
+                reiniciar.undraw()
                 sair.undraw()
             
             pause()
