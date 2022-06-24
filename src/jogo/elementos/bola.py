@@ -1,5 +1,5 @@
 
-from graphics import GraphWin
+from graphics import GraphWin, Circle
 from jogo.elementos.barra import Barra
 
 
@@ -11,6 +11,7 @@ class Bola:
     velocidade_y: float
     raio: int
     cor: str
+    desenho: Circle
 
     def __init__(
             self,
@@ -36,6 +37,11 @@ class Bola:
             executado.
         """
         # TODO desenhar barra na janela com base nos parâmetros self.
+
+    def apagar_desenho(self) -> None:
+        """Apaga o desenho da bola.
+        """
+        self.desenho.undraw()
 
     def incrementar_velocidade_x(self, incremento: float) -> None:
         """Incrementa a velocidade horizontal da barra.

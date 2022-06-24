@@ -1,5 +1,5 @@
 
-from graphics import GraphWin
+from graphics import GraphWin, Rectangle
 
 
 class Barra():
@@ -10,6 +10,7 @@ class Barra():
     largura: int
     altura: int
     cor: str
+    desenho: Rectangle
 
     def __init__(
             self,
@@ -35,6 +36,11 @@ class Barra():
             executado.
         """
         # TODO desenhar barra na janela com base nos parâmetros self.
+
+    def apagar_desenho(self) -> None:
+        """Apaga o desenho da barra.
+        """
+        self.desenho.undraw()
 
     def incrementar_velocidade(self, incremento: float) -> None:
         """Incrementa a velocidade da barra.
