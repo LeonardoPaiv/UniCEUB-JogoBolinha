@@ -1,4 +1,5 @@
-from graphics import GraphWin, Text
+from turtle import position
+from graphics import GraphWin, Point, Text
 
 
 class Placar:
@@ -7,7 +8,7 @@ class Placar:
     posicao_y: int
     pontuacao_esquerda: int
     pontuacao_direita: int
-    desenho: Text
+    placar_jogo: Text
 
     def __init__(self, posicao_x: int = 0, posicao_y: int = 0) -> None:
         self.posicao_x = posicao_x
@@ -23,9 +24,31 @@ class Placar:
             executado.
         """
         # TODO desenhar placar na janela
+        self.posicao_x = int(janela.getWidth() / 2)
+        self.posicao_y = int(janela.getHeight() / 2)
+        _tamanho_da_fonte = 36
+        placar_jogo = Text(Point(self.posicao_x, self.posicao_y), str(self.pontuacao_esquerda) + ' : ' + str(self.pontuacao_direita))
+        placar_jogo.setSize(_tamanho_da_fonte)
+        placar_jogo.draw(janela)
         pass
 
-    def apagar_desenho(self):
+    def soma_ponto_player_esq(self):
+        # Soma ponto para o jogador da esquerda
+
+        self.pontuacao_esquerda += 1
+        self.apagar_placar_jogo()
+        self.desenhar()
+
+    
+    def soma_ponto_player_dir(self):
+        # Soma ponto para o jogador da direita
+
+        self.pontuacao_direita += 1
+        self.apagar_placar_jogo()
+        self.desenhar()
+
+
+    def apagar_placar_jogo(self):
         """Apaga o desenho do placar.
         """
-        self.desenho.undraw()
+        self.placar_jogo.undraw()
