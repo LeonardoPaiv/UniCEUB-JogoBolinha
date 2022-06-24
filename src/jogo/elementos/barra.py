@@ -1,5 +1,5 @@
 
-from graphics import GraphWin, Rectangle
+from graphics import GraphWin, Rectangle, Point
 
 
 class Barra():
@@ -18,7 +18,7 @@ class Barra():
             posicao_y: int = 0,
             velocidade_y: int = 0,
             largura: int = 10,
-            altura: int = 10,
+            altura: int = 50,
             cor: str = 'black'
             ) -> None:
         self.posicao_x = posicao_x
@@ -36,6 +36,9 @@ class Barra():
             executado.
         """
         # TODO desenhar barra na janela com base nos parâmetros self.
+        self.desenho = Rectangle(Point(self.posicao_x, self.posicao_y), Point(self.posicao_x + self.largura, self.posicao_y + self.altura))
+        self.desenho.setFill(self.cor)
+        self.desenho.draw(janela)
 
     def apagar_desenho(self) -> None:
         """Apaga o desenho da barra.
@@ -58,8 +61,10 @@ class Barra():
             incremento (int): valor de incremento da altura da barra
             (pode ser negativo).
         """
-        self.altura += incremento
         # TODO garantir que altura não é negativa ou zero
+        if (self.altura + incremento) <= 0: return
+
+        self.altura += incremento
 
     def incrementar_posicao_y(self):
         """Incrementa a posição no eixo y com base em "self.velocidade"

@@ -1,5 +1,5 @@
 
-from graphics import GraphWin, Circle
+from graphics import GraphWin, Circle, Point
 from jogo.elementos.barra import Barra
 
 
@@ -37,6 +37,9 @@ class Bola:
             executado.
         """
         # TODO desenhar barra na janela com base nos parâmetros self.
+        self.desenho = Circle(Point(self.posicao_x, self.posicao_y), self.raio)
+        self.desenho.setFill(self.cor)
+        self.desenho.draw(janela)
 
     def apagar_desenho(self) -> None:
         """Apaga o desenho da bola.
@@ -68,8 +71,10 @@ class Bola:
             incremento (int): valor de incremento de raio da bola
             (pode ser negativo).
         """
-        self.raio += incremento
         # TODO Garantir que raio não é zero ou negativo
+        if (self.raio + incremento) <= 0: return
+
+        self.raio += incremento
 
     def incrementar_posicao(self):
         """Incrementa a posicao com base nas velocidades
@@ -88,9 +93,11 @@ class Bola:
         # TODO chamar método "self.verificar_interseccao" para avaliar
         # TODO se a posição atual da bolina intersecta com a posição da
         # TODO barra em questão.
+        colisao = self.verificar_interseccao(barra)
 
         # TODO ajustar posição e velocidades da bolinha caso haja
         # TODO colisão
+        if colisao: self.velocidade_x = -(self.velocidade_x)
         pass
 
     def verificar_interseccao(self, barra: Barra) -> bool:
