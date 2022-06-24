@@ -79,16 +79,30 @@ class Bola:
         Args:
             barra (Barra): barra para verificar se houve colisão.
         """
-        # TODO determinar valores x e y limite da bola que indicam
-        # TODO conflito/colisão com a barra em questão.
-        # ? Pode ser uma boa ideia usar só um dos lados da bola para se
-        # ? evitar bugs. Imagine a situação em que a barra bate na bola
-        # ? após ela passar. Também é uma alternativa travar os comandos
-        # ? das barras uma vez que a bola passe da face da barra.
-
-        # TODO determinar valores x e y da barra que levariam a
-        # TODO conflito/colisão
+        # TODO chamar método "self.verificar_interseccao" para avaliar
+        # TODO se a posição atual da bolina intersecta com a posição da
+        # TODO barra em questão.
 
         # TODO ajustar posição e velocidades da bolinha caso haja
         # TODO colisão
+        pass
+
+    def verificar_interseccao(self, barra: Barra) -> bool:
+        """Verifica se há intersecção entre o desenho da bola e da
+        barra em questão.
+
+        Args:
+            barra (Barra): barra para verificar se há intersecção
+
+        Returns:
+            bool: True caso haja intersecção.
+        """
+        # TODO determinar valores x e y limite da bola que levariam à
+        # TODO indicação de intersecção com a barra em questão.
+
+        # TODO determinar valores x e y da barra que levariam a
+        # TODO indicação de intersecção.
+
+        # TODO avaliar se há interesecção e retornar True, caso haja,
+        # TODO ou False, caso não haja.
         pass
