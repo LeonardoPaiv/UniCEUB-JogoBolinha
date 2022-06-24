@@ -27,26 +27,27 @@ class Placar:
         self.posicao_x = int(janela.getWidth() / 2)
         self.posicao_y = int(janela.getHeight() / 2)
         _tamanho_da_fonte = 36
-        placar_jogo = Text(Point(self.posicao_x, self.posicao_y), str(self.pontuacao_esquerda) + ' : ' + str(self.pontuacao_direita))
+        placar_jogo = Text(
+            Point(self.posicao_x, self.posicao_y),
+            str(self.pontuacao_esquerda) + ' : ' + str(self.pontuacao_direita)
+            )
         placar_jogo.setSize(_tamanho_da_fonte)
         placar_jogo.draw(janela)
         pass
 
     def soma_ponto_player_esq(self):
-        # Soma ponto para o jogador da esquerda
-
+        """Soma ponto para o jogador da esquerda
+        """
         self.pontuacao_esquerda += 1
         self.apagar_placar_jogo()
         self.desenhar()
 
-    
     def soma_ponto_player_dir(self):
-        # Soma ponto para o jogador da direita
-
+        """Soma ponto para o jogador da direita
+        """
         self.pontuacao_direita += 1
         self.apagar_placar_jogo()
         self.desenhar()
-
 
     def apagar_placar_jogo(self):
         """Apaga o desenho do placar.
