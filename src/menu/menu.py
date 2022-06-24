@@ -8,7 +8,7 @@ class Menu:
     ranking: bool
     sair: bool
     _i_selecao: int
-    _itens: list
+    _itens: list[str]
 
     def __init__(self) -> None:
         self.continuar = False
