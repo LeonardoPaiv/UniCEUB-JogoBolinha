@@ -6,7 +6,7 @@ class Ranking:
     _dados: dict[str, int]
     _endereco_dados: str
 
-    def __init__(self, endereco_dados: str = ".\\data\\ranking.json") -> None:
+    def __init__(self, endereco_dados: str = "data\\ranking.json") -> None:
         self._endereco_dados = endereco_dados
         self._dados = {}
 
