@@ -3,6 +3,8 @@ from graphics import GraphWin
 from jogo.elementos.barra import Barra
 from jogo.elementos.bola import Bola
 from jogo.jogador.jogador import Jogador
+from jogo.elementos.campo import Campo
+from jogo.elementos.placar import Placar
 
 
 class Jogo:
@@ -27,6 +29,7 @@ class Jogo:
         self.parede_inferior = Barra()
         self.zona_pontuacao_esquerda = Barra()
         self.zona_pontuacao_direita = Barra()
+        self.campo = Campo()
 
     def rodar(self, janela: GraphWin) -> None:
         """_summary_
@@ -39,15 +42,23 @@ class Jogo:
         # TODO Chamar o método "self.__definir_jogadores" para
         # TODO definição dos jogadores
 
+        self.__definir_jogadores(janela)
+
         # TODO Chamar o método "self.__desenhar" para desenhar o
         # TODO jogo completo (desenhar campo e placar).
+
+        self.__desenhar(janela, desenhar_campo= True, desenhar_placar= True);
+
+
         # Loop do jogo
         nome_vencedor = ""
         sair = False
         partida_encerrada = False
+
         while not partida_encerrada:
             # TODO Chamar o método "self.__desenhar" para desenhar o
             # TODO jogo em seu estado atual.
+            self.__desenhar(janela, desenhar_campo= False, desenhar_placar= False)
 
             # TODO verificar colisão entre bola e paredes/barras usando
             # TODO o método "self.bola.verificar_colisao"
@@ -129,10 +140,14 @@ class Jogo:
         # TODO desenhar campo
         # TODO desenhar paredes (self)
         # TODO desenhar zonas de pontuação (self)
+        if desenhar_campo: self.campo.desenhar_margens(janela)
 
         # TODO caso desenhar_placar
         # TODO limpar placar (self.jogador_{lado}.pontuacao)
         # TODO desenhar placar (self.jogador_{lado}.pontuacao)
+        if desenhar_placar:
+            Placar.apagar_placar_jogo()
+            Placar.desenhar(janela)
 
         # TODO limpar barras (self)
         # TODO desenhar barras (self)

@@ -14,7 +14,7 @@ class Campo():
 
         pass
 
-    def desenhar_campo(self, janela: GraphWin):
+    def desenhar_margens(self, janela: GraphWin):
 
         self.canto_esquerda.setFill('red')
         self.canto_esquerda.draw(janela)
