@@ -10,9 +10,9 @@ class Placar:
     pontuacao_direita: int
     placar_jogo: Text
 
-    def __init__(self, posicao_x: int = 0, posicao_y: int = 0) -> None:
-        self.posicao_x = posicao_x
-        self.posicao_y = posicao_y
+    def __init__(self, janela: GraphWin) -> None:
+        self.posicao_x = int(janela.getWidth() / 2)
+        self.posicao_y = int(janela.getHeight() / 2)
         self.pontuacao_esquerda = 0
         self.pontuacao_direita = 0
 
@@ -24,8 +24,6 @@ class Placar:
             executado.
         """
         # TODO desenhar placar na janela
-        self.posicao_x = int(janela.getWidth() / 2)
-        self.posicao_y = int(janela.getHeight() / 2)
         _tamanho_da_fonte = 36
         placar_jogo = Text(
             Point(self.posicao_x, self.posicao_y),
