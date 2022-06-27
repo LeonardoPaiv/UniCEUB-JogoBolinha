@@ -29,7 +29,6 @@ class Jogo:
         self.parede_inferior = Barra()
         self.zona_pontuacao_esquerda = Barra()
         self.zona_pontuacao_direita = Barra()
-        self.campo = Campo()
 
     def rodar(self, janela: GraphWin) -> None:
         """_summary_
@@ -140,7 +139,7 @@ class Jogo:
         # TODO desenhar campo
         # TODO desenhar paredes (self)
         # TODO desenhar zonas de pontuação (self)
-        if desenhar_campo: self.campo.desenhar_margens(janela)
+        if desenhar_campo: Campo.desenhar_margens(janela)
 
         # TODO caso desenhar_placar
         # TODO limpar placar (self.jogador_{lado}.pontuacao)
