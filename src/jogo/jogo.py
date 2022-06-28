@@ -154,4 +154,8 @@ class Jogo:
         # TODO limpar bola (self)
         # TODO desenhar bola (self)
 
+        Bola.apagar_desenho()
+
+        Bola.desenhar()
+
         pass

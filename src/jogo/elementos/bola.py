@@ -1,6 +1,8 @@
 
+from io import RawIOBase
 from graphics import GraphWin, Circle, Point
 from jogo.elementos.barra import Barra
+from jogo.elementos.placar import Placar
 
 
 class Bola:
@@ -17,8 +19,8 @@ class Bola:
             self,
             posicao_x: int = 0,
             posicao_y: int = 0,
-            velocidade_x: int = 0,
-            velocidade_y: int = 0,
+            velocidade_x: int = 10,
+            velocidade_y: int = 10,
             raio: int = 10,
             cor: str = 'black'
             ) -> None:
@@ -83,24 +85,41 @@ class Bola:
         self.posicao_x += self.velocidade_x
         self.posicao_y += self.velocidade_y
 
-    def verificar_colisao(self, barra: Barra):
+    def verificar_colisao(self, barra: Barra, janela: GraphWin):
         """Verifica se alguma região da bola está em conflito com a
         barra nas coordenadas atuais.
 
         Args:
             barra (Barra): barra para verificar se houve colisão.
         """
-        # TODO chamar método "self.verificar_interseccao" para avaliar
+        # TODO chamar método "self.verificar_interseccao_barra" para avaliar
         # TODO se a posição atual da bolina intersecta com a posição da
         # TODO barra em questão.
-        colisao = self.verificar_interseccao(barra)
+        colisao_barra = self.verificar_interseccao_barra(barra)
+
+        colisao_campo = self.verificar_interseccao_campo(barra)
+
+        ponto_jogador_esq = self.verificar_ponto_esq(janela)
+
+        ponto_jogador_dir = self.verificar_ponto_dir()
 
         # TODO ajustar posição e velocidades da bolinha caso haja
         # TODO colisão
-        if colisao: self.velocidade_x = -(self.velocidade_x)
+        if colisao_barra: self.velocidade_x = -(self.velocidade_x)
+
+        if colisao_campo: self.velocidade_y = -(self.velocidade_y)
+
+        if ponto_jogador_esq:
+            Placar.soma_ponto_player_esq()
+            Bola.reset_bolinha()
+
+        if ponto_jogador_dir:
+            Placar.soma_ponto_player_dir()
+            Bola.reset_bolinha()
+
         pass
 
-    def verificar_interseccao(self, barra: Barra) -> bool:
+    def verificar_interseccao_barra(self, barra: Barra) -> bool:
         """Verifica se há intersecção entre o desenho da bola e da
         barra em questão.
 
@@ -112,10 +131,57 @@ class Bola:
         """
         # TODO determinar valores x e y limite da bola que levariam à
         # TODO indicação de intersecção com a barra em questão.
+        altura_inicial_barra = barra.posicao_y
+        altura_final_barra = barra.posicao_y + barra.altura
 
-        # TODO determinar valores x e y da barra que levariam a
-        # TODO indicação de intersecção.
+        comprimento_inicial_barra = barra.posicao_x
+        comprimento_final_barra = barra.posicao_x + barra.largura
 
-        # TODO avaliar se há interesecção e retornar True, caso haja,
-        # TODO ou False, caso não haja.
+
+        # esse serve para barra direita
+        if (self.posicao_x + self.raio) > (comprimento_inicial_barra) and (self.posicao_x + self.raio) < (comprimento_final_barra):
+            if (self.posicao_y + self.raio) > (altura_inicial_barra) and (self.posicao_y - self.raio) < (altura_final_barra):
+                return True
+
+        # essa serve para barra esquerda
+        if (self.posicao_x - self.raio) > (comprimento_inicial_barra) and (self.posicao_x - self.raio) < (comprimento_final_barra):
+            if (self.posicao_y + self.raio) > (altura_inicial_barra) and (self.posicao_y - self.raio) < (altura_final_barra):
+                return True
+
+        return False
+        pass
+
+    def verificar_interseccao_campo(self, janela: GraphWin) -> bool:
+
+        if (self.posicao_y - self.raio) < 10 or (self.posicao_y + self.raio) > janela.getHeight() - 10:
+            return True
+
+        return False
+        pass
+
+    def verificar_ponto_esq(self, janela: GraphWin):
+        
+
+        if self.posicao_x > janela.getWidth + 50:
+            return True
+        return False
+        pass
+
+    def verificar_ponto_dir(self) -> None:
+
+        if self.posicao_x < -50:
+            return True
+        return False
+        pass
+
+        
+
+    def reset_bolinha(self, janela: GraphWin) -> None:
+
+        self.posicao_x = janela.getWidth / 2
+        self.posicao_y = janela.getHeight / 2
+        self.velocidade_x = 10
+        self.velocidade_y = 10
+        self.raio = 10
+
         pass
