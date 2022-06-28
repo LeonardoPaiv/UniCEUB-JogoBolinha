@@ -1,8 +1,8 @@
 
 from io import RawIOBase
 from graphics import GraphWin, Circle, Point
-from jogo.elementos.barra import Barra
-from jogo.elementos.placar import Placar
+from src.jogo.elementos.barra import Barra
+from src.jogo.elementos.placar import Placar
 
 
 class Bola:

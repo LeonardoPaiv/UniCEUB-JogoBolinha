@@ -1,10 +1,10 @@
 
 from graphics import GraphWin
-from jogo.elementos.barra import Barra
-from jogo.elementos.bola import Bola
-from jogo.jogador.jogador import Jogador
-from jogo.elementos.campo import Campo
-from jogo.elementos.placar import Placar
+from src.jogo.elementos.barra import Barra
+from src.jogo.elementos.bola import Bola
+from src.jogo.jogador.jogador import Jogador
+from src.jogo.elementos.campo import Campo
+from src.jogo.elementos.placar import Placar
 
 
 class Jogo:

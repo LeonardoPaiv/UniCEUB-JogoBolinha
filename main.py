@@ -24,7 +24,7 @@ def rodar():
     sair = False
     while not sair:
         menu = Menu()
-        menu.rodar()
+        menu.rodar(janela)
         if menu.iniciar:
             jogo = Jogo()
             sair = jogo.rodar(janela)
