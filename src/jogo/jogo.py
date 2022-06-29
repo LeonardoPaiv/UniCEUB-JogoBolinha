@@ -5,6 +5,7 @@ from src.jogo.elementos.bola import Bola
 from src.jogo.jogador.jogador import Jogador
 from src.jogo.elementos.campo import Campo
 from src.jogo.elementos.placar import Placar
+import time
 
 
 class Jogo:
@@ -14,21 +15,15 @@ class Jogo:
     bola: Bola
     barra_esquerda: Barra
     barra_direita: Barra
-    parede_superior: Barra
-    parede_inferior: Barra
-    zona_pontuacao_esquerda: Barra
-    zona_pontuacao_direita: Barra
+
 
     def __init__(self) -> None:
         self.jogador_esquerda = Jogador()
         self.jogador_direita = Jogador()
         self.bola = Bola()
-        self.barra_esquerda = Barra()
-        self.barra_direita = Barra()
-        self.parede_superior = Barra()
-        self.parede_inferior = Barra()
-        self.zona_pontuacao_esquerda = Barra()
-        self.zona_pontuacao_direita = Barra()
+        self.barra_esquerda = Barra(velocidade_y= 40, cor= 'pink')
+        self.barra_direita = Barra( velocidade_y= 40, cor= 'purple')
+    
 
     def rodar(self, janela: GraphWin) -> None:
         """_summary_
@@ -55,12 +50,18 @@ class Jogo:
         partida_encerrada = False
 
         while not partida_encerrada:
+
+            tecla = janela.checkKey()
+
             # TODO Chamar o método "self.__desenhar" para desenhar o
             # TODO jogo em seu estado atual.
             self.__desenhar(janela, desenhar_campo= False, desenhar_placar= False)
+            self.bola.incrementar_posicao()
+            self.bola.apagar_desenho()
 
             # TODO verificar colisão entre bola e paredes/barras usando
             # TODO o método "self.bola.verificar_colisao"
+
 
             # TODO caso haja colisão com uma das barras:
             # ? atualizar velocidade da bola?
@@ -98,13 +99,35 @@ class Jogo:
             # ! principal, comando do jogador da esquerda e comando do
             # ! jogador da direita.
 
+            if tecla == 'Up': 
+                self.barra_direita.apagar_desenho()
+                self.barra_direita.decrementar_posicao_Y()
+                self.barra_direita.desenhar(janela)
+
+            if tecla == 'Down': 
+                self.barra_direita.apagar_desenho()
+                self.barra_direita.incrementar_posicao_y()
+                self.barra_direita.desenhar(janela)
+
+            if tecla == 'w' or tecla == 'W': 
+                self.barra_esquerda.apagar_desenho()
+                self.barra_esquerda.decrementar_posicao_Y()
+                self.barra_esquerda.desenhar(janela)
+
+            if tecla == 's' or tecla == 'S': 
+                self.barra_esquerda.apagar_desenho()
+                self.barra_esquerda.incrementar_posicao_y()
+                self.barra_esquerda.desenhar(janela)
+
+
+
             # TODO Inicializar menu com parâmetro "em_jogo" = True em
             # TODO caso de "escape". Setar variável sair = menu.sair.
             # TODO caso contiuar, chamar o método "self.__desenhar"
             # TODO para desenhar o jogo completo (desenhar campo e
             # TODO placar).
 
-            break
+            #break
 
         return sair, nome_vencedor
 
@@ -134,28 +157,48 @@ class Jogo:
             desenhar_placar (bool): Indica se o placar deve ser
             desenhado.
         """
+
+        campo = Campo(janela)
+        placar = Placar(janela)
+
+        if desenhar_campo: 
+            campo.desenhar_margens(janela)
+            self.barra_direita.posicao_inicial_dir(janela)
+            self.barra_direita.desenhar(janela)
+            self.barra_esquerda.posicao_inicial_esq(janela)
+            self.barra_esquerda.desenhar(janela)
+            self.bola.reset_bolinha(janela)
+            self.bola.desenhar(janela)
+        if desenhar_placar:
+            placar.apagar_placar_jogo()
+            placar.desenhar(janela)
+        self.bola.apagar_desenho()
+        
+
+
+        self.bola.desenhar(janela)
+
+        self.bola.verificar_colisao(self.barra_esquerda, self.barra_direita, janela)
+
+        print(placar.pontuacao_esquerda)
+      
+
         # TODO caso desenhar_campo:
         # TODO limpar desenho
         # TODO desenhar campo
         # TODO desenhar paredes (self)
         # TODO desenhar zonas de pontuação (self)
-        if desenhar_campo: Campo.desenhar_margens(janela)
 
         # TODO caso desenhar_placar
         # TODO limpar placar (self.jogador_{lado}.pontuacao)
         # TODO desenhar placar (self.jogador_{lado}.pontuacao)
-        if desenhar_placar:
-            Placar.apagar_placar_jogo()
-            Placar.desenhar(janela)
 
         # TODO limpar barras (self)
         # TODO desenhar barras (self)
 
         # TODO limpar bola (self)
         # TODO desenhar bola (self)
-
-        Bola.apagar_desenho()
-
-        Bola.desenhar()
+        #janela.getMouse()
+        time.sleep(0.06)
 
         pass

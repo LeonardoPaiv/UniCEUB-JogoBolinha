@@ -18,7 +18,7 @@ class Barra():
             posicao_y: int = 0,
             velocidade_y: int = 0,
             largura: int = 10,
-            altura: int = 50,
+            altura: int = 100,
             cor: str = 'black'
             ) -> None:
         self.posicao_x = posicao_x
@@ -70,3 +70,18 @@ class Barra():
         """Incrementa a posição no eixo y com base em "self.velocidade"
         """
         self.posicao_y += self.velocidade_y
+
+    def decrementar_posicao_Y(self):
+
+        self.posicao_y -= self.velocidade_y
+
+    def posicao_inicial_esq(self, janela: GraphWin):
+
+        self.posicao_y = int((janela.getHeight() / 2) - (self.altura / 2))
+        self.posicao_x = 30
+
+    def posicao_inicial_dir(self, janela: GraphWin):
+
+        self.posicao_y = int((janela.getHeight() / 2) - (self.altura / 2))
+        self.posicao_x = janela.getWidth() - 30
+
