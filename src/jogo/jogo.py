@@ -7,6 +7,8 @@ from src.jogo.elementos.campo import Campo
 from src.jogo.elementos.placar import Placar
 import time
 
+from src.ranking.ranking import Ranking
+
 
 class Jogo:
 
@@ -124,10 +126,13 @@ class Jogo:
 
             if self.placar.pontuacao_esquerda == 10:
                 partida_encerrada = True
-                nome_vencedor = 
 
             if self.placar.pontuacao_direita == 10:
                 partida_encerrada = True
+
+            if partida_encerrada: 
+                ranking = Ranking()
+                ranking.rodar(janela)
 
 
 
