@@ -22,7 +22,7 @@ class Jogo:
         self.jogador_direita = Jogador()
         self.bola = Bola()
         self.barra_esquerda = Barra(velocidade_y= 40, cor= 'pink')
-        self.barra_direita = Barra( velocidade_y= 40, cor= 'purple')
+        self.barra_direita = Barra(velocidade_y= 40, cor= 'purple')
     
 
     def rodar(self, janela: GraphWin) -> None:
@@ -177,10 +177,8 @@ class Jogo:
 
 
         self.bola.desenhar(janela)
-
         self.bola.verificar_colisao(self.barra_esquerda, self.barra_direita, janela)
 
-        print(placar.pontuacao_esquerda)
       
 
         # TODO caso desenhar_campo:

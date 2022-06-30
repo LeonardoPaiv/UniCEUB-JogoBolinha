@@ -1,5 +1,6 @@
 
 
+from hashlib import algorithms_available
 from graphics import GraphWin, tk
 from src.jogo.jogo import Jogo
 from src.menu.menu import Menu
