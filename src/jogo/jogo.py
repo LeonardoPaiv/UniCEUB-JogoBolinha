@@ -103,7 +103,6 @@ class Jogo:
 
             tecla = janela.checkKey()
 
-
             Movimentar = {
                 "up": self.barra_direita.subir,
                 "down": self.barra_direita.descer,
@@ -192,18 +191,23 @@ class Jogo:
 
         self.bola.desenhar(janela)
 
-        joao = self.bola.verificar_colisao(self.barra_esquerda, self.barra_direita, janela)
+        jogador_pontuou = self.bola.verificar_colisao(self.barra_esquerda, self.barra_direita, janela)
 
-        if joao == 'ponto_esq': 
+        if jogador_pontuou == 'ponto_esq': 
             self.placar.soma_ponto_player_esq(janela)
             self.placar.apagar_placar_jogo()
             self.placar.desenhar(janela)
 
-        if joao == 'ponto_dir': 
+            self.barra_esquerda.alterar_altura(janela, -20)
+            self.barra_direita.alterar_altura(janela, 20)
+
+        if jogador_pontuou == 'ponto_dir': 
             self.placar.soma_ponto_player_dir(janela)
             self.placar.apagar_placar_jogo()
             self.placar.desenhar(janela)
-              
+
+            self.barra_esquerda.alterar_altura(janela, 20)
+            self.barra_direita.alterar_altura(janela, -20)
 
         # TODO caso desenhar_campo:
         # TODO limpar desenho

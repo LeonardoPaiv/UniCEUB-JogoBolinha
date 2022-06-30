@@ -96,20 +96,21 @@ class Bola:
         # TODO chamar método "self.verificar_interseccao_barra" para avaliar
         # TODO se a posição atual da bolina intersecta com a posição da
         # TODO barra em questão.
-        colisao_barra_esq = self.verificar_interseccao_barra(barra_esq)
-        colisao_barra_dir = self.verificar_interseccao_barra(barra_dir)
-
-        colisao_campo = self.verificar_interseccao_campo(janela)
-
-        ponto_jogador_esq = self.verificar_ponto_esq(janela)
-        ponto_jogador_dir = self.verificar_ponto_dir()
-
+        
         # TODO ajustar posição e velocidades da bolinha caso haja
         # TODO colisão
 
+        colisao_barra_esq = self.verificar_interseccao_barra(barra_esq)
+        colisao_barra_dir = self.verificar_interseccao_barra(barra_dir)
+
         if colisao_barra_esq or colisao_barra_dir: self.velocidade_x = -(self.velocidade_x)
 
+        colisao_campo = self.verificar_interseccao_campo(janela)
+        
         if colisao_campo: self.velocidade_y = -(self.velocidade_y)
+
+        ponto_jogador_esq = self.verificar_ponto_esq(janela)
+        ponto_jogador_dir = self.verificar_ponto_dir()
 
         if ponto_jogador_esq:
             self.reset_bolinha(janela)
