@@ -131,6 +131,11 @@ class Jogo:
                 partida_encerrada = True
 
             if partida_encerrada: 
+                self.bola.apagar_desenho()
+                self.barra_esquerda.apagar_desenho()
+                self.barra_direita.apagar_desenho()
+                self.placar.apagar_placar_jogo()
+                janela.getMouse()
                 ranking = Ranking()
                 ranking.rodar(janela)
 
