@@ -23,12 +23,8 @@ class Jogo:
         self.jogador_direita = Jogador()
         self.bola = Bola()
         self.barra_esquerda = Barra(velocidade_y= 40, cor= 'pink')
-<<<<<<< HEAD
-        self.barra_direita = Barra(velocidade_y= 40, cor= 'purple')
-=======
         self.barra_direita = Barra( velocidade_y= 40, cor= 'purple')
         self.placar = Placar(janela)
->>>>>>> 7731a87d383305cdfca9762f9c549169c0c5c215
     
 
     def rodar(self, janela: GraphWin) -> None:
@@ -128,6 +124,7 @@ class Jogo:
 
             if self.placar.pontuacao_esquerda == 10:
                 partida_encerrada = True
+                nome_vencedor = 
 
             if self.placar.pontuacao_direita == 10:
                 partida_encerrada = True
@@ -189,11 +186,6 @@ class Jogo:
 
 
         self.bola.desenhar(janela)
-<<<<<<< HEAD
-        self.bola.verificar_colisao(self.barra_esquerda, self.barra_direita, janela)
-
-      
-=======
 
         joao = self.bola.verificar_colisao(self.barra_esquerda, self.barra_direita, janela)
 
@@ -207,7 +199,6 @@ class Jogo:
             self.placar.apagar_placar_jogo()
             self.placar.desenhar(janela)
               
->>>>>>> 7731a87d383305cdfca9762f9c549169c0c5c215
 
         # TODO caso desenhar_campo:
         # TODO limpar desenho
