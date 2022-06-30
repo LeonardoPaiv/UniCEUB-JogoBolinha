@@ -37,9 +37,10 @@ class Menu:
             self._itens.append('Continuar')
         # Loop de leitura do menu
         selecionado = False
+        self.__desenhar(janela)
         while not selecionado:
             # TODO desenhar menu chamando o método "self.__desenhar"
-            self.__desenhar(janela)
+            
 
             # TODO ler tecla do jogador
             tecla = janela.checkKey()
@@ -65,11 +66,9 @@ class Menu:
             if tecla == 'Return':
                 self.__executar_acao()
                 selecionado = True
-            break
+                
 
-        pass
-
-    def __desenhar(self, janela: GraphWin) -> None:
+    def __desenhar(self, janela: GraphWin, em_jogo: bool = False) -> None:
         """Desenha o menu na tela do jogo. Os itens do menu estão
         contidos no dicionário "self.itens".
 
@@ -78,7 +77,7 @@ class Menu:
             executado.
         """
         # TODO Limpa a janela.
-        
+        self.__apagar()
         # TODO Desenha os itens do menu de opções de acordo com a lista
         # TODO "self._itens".
         # ! A opção selecionada "self._i_selecao" deve ser destacada.
@@ -87,8 +86,6 @@ class Menu:
             self.texts.append(Text(Point(300, y), item))
             y += 100
             self.texts[-1].draw(janela)
-        print
-        pass
 
     def __executar_acao(self) -> None:
         """Executa a ação associada ao item selecionado (identificado
@@ -112,3 +109,7 @@ class Menu:
             self.sair = True
 
         pass
+
+    def __apagar(self) -> None:
+        for i in range(len(self.texts)):
+            self.texts[i].undraw()
