@@ -23,18 +23,18 @@ def rodar():
     jogo.rodar(janela)
 
     # Loop do programa
-    #sair = False
-    #while not sair:
-    #    menu = Menu()
-    #    menu.rodar(janela)
-    #    if menu.iniciar:
-    #        jogo = Jogo()
-    #        sair = jogo.rodar(janela)
-    #    elif menu.ranking:
-    #        ranking = Ranking()
-    #        ranking.rodar(janela)
-    #    elif menu.sair:
-    #        sair = True
+    sair = False
+    while not sair:
+        menu = Menu()
+        menu.rodar(janela)
+        if menu.iniciar:
+            jogo = Jogo()
+            sair = jogo.rodar(janela)
+        elif menu.ranking:
+            ranking = Ranking()
+            ranking.rodar(janela)
+        elif menu.sair:
+            sair = True
 
 
 if __name__ == "__main__":
