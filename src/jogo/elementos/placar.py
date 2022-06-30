@@ -28,6 +28,10 @@ class Placar:
             executado.
         """
         # TODO desenhar placar na janela
+        self.placar_jogo = Text(
+            Point(self.posicao_x, self.posicao_y),
+            str(self.pontuacao_esquerda) + ' : ' + str(self.pontuacao_direita)
+            )
         _tamanho_da_fonte = 36
         self.placar_jogo.setSize(_tamanho_da_fonte)
         self.placar_jogo.draw(janela)
@@ -37,12 +41,10 @@ class Placar:
         """Soma ponto para o jogador da esquerda
         """
         self.pontuacao_esquerda += 1
-        self.atualiza_placar(janela) 
+        self.apagar_placar_jogo()
+        self.desenhar(janela) 
         print(self.pontuacao_esquerda)
 
-    def atualiza_placar(self, janela: GraphWin):
-        self.apagar_placar_jogo()
-        self.desenhar(janela)
 
     def soma_ponto_player_dir(self, janela):
         """Soma ponto para o jogador da direita
@@ -52,7 +54,12 @@ class Placar:
         self.desenhar(janela)
         print(self.pontuacao_direita)
 
+
     def apagar_placar_jogo(self):
         """Apaga o desenho do placar.
         """
         self.placar_jogo.undraw()
+
+    def atualizar_placar(self, janela):
+        self.apagar_placar_jogo()
+        self.desenhar(janela)

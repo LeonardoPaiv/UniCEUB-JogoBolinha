@@ -15,14 +15,16 @@ class Jogo:
     bola: Bola
     barra_esquerda: Barra
     barra_direita: Barra
+    placar: Placar
 
 
-    def __init__(self) -> None:
+    def __init__(self, janela) -> None:
         self.jogador_esquerda = Jogador()
         self.jogador_direita = Jogador()
         self.bola = Bola()
         self.barra_esquerda = Barra(velocidade_y= 40, cor= 'pink')
         self.barra_direita = Barra( velocidade_y= 40, cor= 'purple')
+        self.placar = Placar(janela)
     
 
     def rodar(self, janela: GraphWin) -> None:
@@ -120,13 +122,20 @@ class Jogo:
                 self.barra_esquerda.desenhar(janela)
 
 
+            if self.placar.pontuacao_esquerda == 10:
+                partida_encerrada = True
+
+            if self.placar.pontuacao_direita == 10:
+                partida_encerrada = True
+
+
 
             # TODO Inicializar menu com parâmetro "em_jogo" = True em
             # TODO caso de "escape". Setar variável sair = menu.sair.
             # TODO caso contiuar, chamar o método "self.__desenhar"
             # TODO para desenhar o jogo completo (desenhar campo e
             # TODO placar).
-
+            sair = False
             #break
 
         return sair, nome_vencedor
@@ -159,7 +168,6 @@ class Jogo:
         """
 
         campo = Campo(janela)
-        placar = Placar(janela)
 
         if desenhar_campo: 
             campo.desenhar_margens(janela)
@@ -170,18 +178,26 @@ class Jogo:
             self.bola.reset_bolinha(janela)
             self.bola.desenhar(janela)
         if desenhar_placar:
-            placar.apagar_placar_jogo()
-            placar.desenhar(janela)
+            self.placar.apagar_placar_jogo()
+            self.placar.desenhar(janela)
         self.bola.apagar_desenho()
         
 
 
         self.bola.desenhar(janela)
 
-        self.bola.verificar_colisao(self.barra_esquerda, self.barra_direita, janela)
+        joao = self.bola.verificar_colisao(self.barra_esquerda, self.barra_direita, janela)
 
-        print(placar.pontuacao_esquerda)
-      
+        if joao == 'ponto_esq': 
+            self.placar.soma_ponto_player_esq(janela)
+            self.placar.apagar_placar_jogo()
+            self.placar.desenhar(janela)
+
+        if joao == 'ponto_dir': 
+            self.placar.soma_ponto_player_dir(janela)
+            self.placar.apagar_placar_jogo()
+            self.placar.desenhar(janela)
+              
 
         # TODO caso desenhar_campo:
         # TODO limpar desenho

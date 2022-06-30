@@ -19,7 +19,7 @@ def rodar():
     janela_altura = tela_altura/2
     janela = GraphWin("Nosso Pong", janela_largura, janela_altura)
 
-    jogo = Jogo()
+    jogo = Jogo(janela)
     jogo.rodar(janela)
 
     # Loop do programa

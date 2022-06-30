@@ -115,10 +115,12 @@ class Bola:
 
         if ponto_jogador_esq:
             self.reset_bolinha(janela)
+            return 'ponto_esq'
 
 
         if ponto_jogador_dir:
             self.reset_bolinha(janela)
+            return 'ponto_dir'
          
 
         pass
