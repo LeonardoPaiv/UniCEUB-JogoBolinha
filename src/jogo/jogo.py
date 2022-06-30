@@ -124,11 +124,11 @@ class Jogo:
 
             if self.placar.pontuacao_esquerda == 10:
                 partida_encerrada = True
+                nome_vencedor = "1"
 
             if self.placar.pontuacao_direita == 10:
                 partida_encerrada = True
-
-
+                nome_vencedor = "2"
 
             # TODO Inicializar menu com parâmetro "em_jogo" = True em
             # TODO caso de "escape". Setar variável sair = menu.sair.
