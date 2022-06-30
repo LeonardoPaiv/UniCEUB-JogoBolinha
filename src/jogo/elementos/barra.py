@@ -85,3 +85,5 @@ class Barra():
         self.posicao_y = int((janela.getHeight() / 2) - (self.altura / 2))
         self.posicao_x = janela.getWidth() - 30
 
+        
+
