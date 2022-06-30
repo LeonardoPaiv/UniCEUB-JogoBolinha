@@ -43,7 +43,6 @@ class Placar:
         self.pontuacao_esquerda += 1
         self.apagar_placar_jogo()
         self.desenhar(janela) 
-        print(self.pontuacao_esquerda)
 
 
     def soma_ponto_player_dir(self, janela):
@@ -52,7 +51,6 @@ class Placar:
         self.pontuacao_direita += 1
         self.apagar_placar_jogo()
         self.desenhar(janela)
-        print(self.pontuacao_direita)
 
 
     def apagar_placar_jogo(self):
