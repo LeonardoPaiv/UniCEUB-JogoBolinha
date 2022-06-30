@@ -7,6 +7,8 @@ from src.jogo.elementos.campo import Campo
 from src.jogo.elementos.placar import Placar
 import time
 
+from src.ranking.ranking import Ranking
+
 
 class Jogo:
 
@@ -114,6 +116,20 @@ class Jogo:
 
             if self.placar.pontuacao_esquerda == 10:
                 partida_encerrada = True
+
+            if self.placar.pontuacao_direita == 10:
+                partida_encerrada = True
+
+            if partida_encerrada: 
+                self.bola.apagar_desenho()
+                self.barra_esquerda.apagar_desenho()
+                self.barra_direita.apagar_desenho()
+                self.placar.apagar_placar_jogo()
+                janela.getMouse()
+                ranking = Ranking()
+                ranking.rodar(janela)
+
+
                 nome_vencedor = "1"
 
             if self.placar.pontuacao_direita == 10:
