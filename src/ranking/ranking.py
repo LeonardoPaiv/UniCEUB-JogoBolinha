@@ -1,4 +1,4 @@
-from graphics import GraphWin
+from graphics import GraphWin, Point, Text
 import json
 
 
@@ -6,10 +6,13 @@ class Ranking:
 
     _dados: dict[str, int]
     _endereco_dados: str
+    _rank: list[Text]
 
     def __init__(self, endereco_dados: str = "data\\ranking.json") -> None:
         self._endereco_dados = endereco_dados
         self._dados = {}
+        self._rank = []
+        
 
     def rodar(self, janela: GraphWin) -> None:
         """Roda o ranking do jogo.
@@ -20,8 +23,7 @@ class Ranking:
         """
         # TODO carregar dados do ranking a partir do arquivo
         # TODO ranking.json da pasta dados "self.__carregar_dados"
-        with open(self._endereco_dados, 'r') as endereco:
-            self._dados = json.load(endereco)
+        self.__carregar_dados()
 
         # TODO desenhar ranking chamando o método "self.__desenhar"
         self.__desenhar(janela)
@@ -48,6 +50,8 @@ class Ranking:
         # TODO abrir arquivo json em "self.endereco_dados" em modo
         # TODO leitura e armazenar seu conteúdo no dicionário
         # TODO "self._dados".
+        with open(self._endereco_dados, 'r') as data:
+            self._dados = json.load(data)
         pass
 
     def __desenhar(self, janela: GraphWin) -> None:
@@ -58,9 +62,14 @@ class Ranking:
             executado.
         """
         # TODO Limpa a janela.
-
+        self.__apagar()
         # TODO Ordena e desenha a lista do ranking. Desenhar nomes e
         # TODO quantidades de partidas ganhas.
+        ordem = sorted(self._dados.items(), key=lambda x: x[1], reverse=True)
+        for k,v in ordem:
+            self._rank.append(Text(Point(300, 300), '{}: {}'.format(k, v)))
+            self._rank[-1].setSize(20)
+            self._rank[-1].draw(janela)
         pass
 
     def atualizar_dados(self, nome_jogador: str) -> None:
@@ -72,10 +81,16 @@ class Ranking:
             ganhas será incrementado.
         """
         # TODO Chamar o método self.__carregar_dados
-
+        self.__carregar_dados()
         # TODO Modificar "self._dados" para registrar a nova vitória do
         # TODO jogador.
-
+        self._dados[nome_jogador] += 1
         # TODO Abrir o arquivo json em modo escrita e reescrever seu conteúdo
         # TODO de acordo com os dados atualizados.
+        with open(self._endereco_dados, 'w') as atualizar:
+            json.dumps(atualizar)
         pass
+
+    def __apagar(self) -> None:
+        for i in range(len(self._rank)):
+            self._rank[i].undraw()
