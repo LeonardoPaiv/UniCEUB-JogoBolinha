@@ -7,6 +7,8 @@ from src.jogo.elementos.campo import Campo
 from src.jogo.elementos.placar import Placar
 import time
 
+from src.ranking.ranking import Ranking
+
 
 class Jogo:
 
@@ -23,7 +25,7 @@ class Jogo:
         self.jogador_direita = Jogador()
         self.bola = Bola()
         self.barra_esquerda = Barra(velocidade_y= 40, cor= 'pink')
-        self.barra_direita = Barra( velocidade_y= 40, cor= 'purple')
+        self.barra_direita = Barra(velocidade_y= 40, cor= 'purple')
         self.placar = Placar(janela)
     
 
@@ -52,8 +54,6 @@ class Jogo:
         partida_encerrada = False
 
         while not partida_encerrada:
-
-            tecla = janela.checkKey()
 
             # TODO Chamar o método "self.__desenhar" para desenhar o
             # TODO jogo em seu estado atual.
@@ -101,26 +101,18 @@ class Jogo:
             # ! principal, comando do jogador da esquerda e comando do
             # ! jogador da direita.
 
-            if tecla == 'Up': 
-                self.barra_direita.apagar_desenho()
-                self.barra_direita.decrementar_posicao_Y()
-                self.barra_direita.desenhar(janela)
+            tecla = janela.checkKey()
 
-            if tecla == 'Down': 
-                self.barra_direita.apagar_desenho()
-                self.barra_direita.incrementar_posicao_y()
-                self.barra_direita.desenhar(janela)
 
-            if tecla == 'w' or tecla == 'W': 
-                self.barra_esquerda.apagar_desenho()
-                self.barra_esquerda.decrementar_posicao_Y()
-                self.barra_esquerda.desenhar(janela)
+            Movimentar = {
+                "up": self.barra_direita.subir,
+                "down": self.barra_direita.descer,
+                "w": self.barra_esquerda.subir,
+                "s":  self.barra_esquerda.descer,
+            }
 
-            if tecla == 's' or tecla == 'S': 
-                self.barra_esquerda.apagar_desenho()
-                self.barra_esquerda.incrementar_posicao_y()
-                self.barra_esquerda.desenhar(janela)
-
+            if tecla.lower() in Movimentar:
+                Movimentar[tecla.lower()](janela)
 
             if self.placar.pontuacao_esquerda == 10:
                 partida_encerrada = True
@@ -128,7 +120,21 @@ class Jogo:
             if self.placar.pontuacao_direita == 10:
                 partida_encerrada = True
 
+            if partida_encerrada: 
+                self.bola.apagar_desenho()
+                self.barra_esquerda.apagar_desenho()
+                self.barra_direita.apagar_desenho()
+                self.placar.apagar_placar_jogo()
+                janela.getMouse()
+                ranking = Ranking()
+                ranking.rodar(janela)
 
+
+                nome_vencedor = "1"
+
+            if self.placar.pontuacao_direita == 10:
+                partida_encerrada = True
+                nome_vencedor = "2"
 
             # TODO Inicializar menu com parâmetro "em_jogo" = True em
             # TODO caso de "escape". Setar variável sair = menu.sair.

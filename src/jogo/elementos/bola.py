@@ -96,19 +96,17 @@ class Bola:
         # TODO chamar método "self.verificar_interseccao_barra" para avaliar
         # TODO se a posição atual da bolina intersecta com a posição da
         # TODO barra em questão.
-        colisao_barra_esq = self.verificar_interseccao_barra_esq(barra_esq)
-
-        colisao_barra_dir = self.verificar_interseccao_barra_dir(barra_dir)
+        colisao_barra_esq = self.verificar_interseccao_barra(barra_esq)
+        colisao_barra_dir = self.verificar_interseccao_barra(barra_dir)
 
         colisao_campo = self.verificar_interseccao_campo(janela)
 
         ponto_jogador_esq = self.verificar_ponto_esq(janela)
-
         ponto_jogador_dir = self.verificar_ponto_dir()
-
 
         # TODO ajustar posição e velocidades da bolinha caso haja
         # TODO colisão
+
         if colisao_barra_esq or colisao_barra_dir: self.velocidade_x = -(self.velocidade_x)
 
         if colisao_campo: self.velocidade_y = -(self.velocidade_y)
@@ -117,99 +115,58 @@ class Bola:
             self.reset_bolinha(janela)
             return 'ponto_esq'
 
-
         if ponto_jogador_dir:
             self.reset_bolinha(janela)
             return 'ponto_dir'
          
 
-        pass
+    
+    def verificar_interseccao_barra(self, barra: Barra):
+        inicio_vertical_barra = barra.posicao_y
+        final_vertical_barra = barra.posicao_y + barra.altura
 
+        inicio_horizontal_barra = barra.posicao_x
+        fim_horizontal_barra = barra.posicao_x + barra.largura
 
-    def verificar_interseccao_barra_esq(self, barra_esq: Barra) -> bool:
-        """Verifica se há intersecção entre o desenho da bola e da
-        barra em questão.
+        inicio_horizontal_bola = self.posicao_x - self.raio
+        final_horizontal_bola = self.posicao_x + self.raio
 
-        Args:
-            barra (Barra): barra para verificar se há intersecção
+        inicio_vertical_bola = self.posicao_y - self.raio
+        final_vertical_bola = self.posicao_y + self.raio
 
-        Returns:
-            bool: True caso haja intersecção.
-        """
-        # TODO determinar valores x e y limite da bola que levariam à
-        # TODO indicação de intersecção com a barra em questão.
-        altura_inicial_barra = barra_esq.posicao_y
-        altura_final_barra = barra_esq.posicao_y + barra_esq.altura
+        def is_encostando_barra(coordenada_bola, orientacao):
+            if (orientacao == "horizontal"):
+                return coordenada_bola <= fim_horizontal_barra and coordenada_bola >= inicio_horizontal_barra
+            else:
+                return coordenada_bola <= final_vertical_barra and coordenada_bola >= inicio_vertical_barra
 
-        comprimento_inicial_barra = barra_esq.posicao_x
-        comprimento_final_barra = barra_esq.posicao_x + barra_esq.largura
+        is_encostando_horizontal = is_encostando_barra(inicio_horizontal_bola, "horizontal") or is_encostando_barra(final_horizontal_bola, "horizontal")
+        is_encostando_vertical = is_encostando_barra(inicio_vertical_bola, "vertical") or is_encostando_barra(final_vertical_bola, "vertical")
 
+        is_encostando = is_encostando_horizontal and is_encostando_vertical
 
-        # esse serve para barra direita
-        if (self.posicao_x + self.raio) > (comprimento_inicial_barra) and (self.posicao_x + self.raio) < (comprimento_final_barra):
-            if (self.posicao_y + self.raio) > (altura_inicial_barra) and (self.posicao_y - self.raio) < (altura_final_barra):
-                return True
-
-        # essa serve para barra esquerda
-        if (self.posicao_x - self.raio) > (comprimento_inicial_barra) and (self.posicao_x - self.raio) < (comprimento_final_barra):
-            if (self.posicao_y + self.raio) > (altura_inicial_barra) and (self.posicao_y - self.raio) < (altura_final_barra):
-                return True
-
-        return False
-
-    def verificar_interseccao_barra_dir(self, barra_dir: Barra):
-
-        altura_inicial_barra = barra_dir.posicao_y
-        altura_final_barra = barra_dir.posicao_y + barra_dir.altura
-
-        comprimento_inicial_barra = barra_dir.posicao_x
-        comprimento_final_barra = barra_dir.posicao_x + barra_dir.largura
-
-
-        # esse serve para barra direita
-        if (self.posicao_x + self.raio) > (comprimento_inicial_barra) and (self.posicao_x + self.raio) < (comprimento_final_barra):
-            if (self.posicao_y + self.raio) > (altura_inicial_barra) and (self.posicao_y - self.raio) < (altura_final_barra):
-                return True
-
-        # essa serve para barra esquerda
-        if (self.posicao_x - self.raio) > (comprimento_inicial_barra) and (self.posicao_x - self.raio) < (comprimento_final_barra):
-            if (self.posicao_y + self.raio) > (altura_inicial_barra) and (self.posicao_y - self.raio) < (altura_final_barra):
-                return True
-
-        return False
-
+        return is_encostando
 
     def verificar_interseccao_campo(self, janela: GraphWin) -> bool:
+        inicio_horizontal_bola = self.posicao_y - self.raio
+        fim_horizontal_bola = self.posicao_y + self.raio
 
-        if (self.posicao_y - self.raio) < 10 or (self.posicao_y + self.raio) > janela.getHeight() - 10:
-            return True
+        is_bola_dentro_tela = inicio_horizontal_bola < 10 or fim_horizontal_bola > janela.getHeight() - 10
 
-        return False
-        pass
+        return is_bola_dentro_tela
 
     def verificar_ponto_esq(self, janela: GraphWin):
-        
-
-        if self.posicao_x > int(janela.getWidth() + 50):
-            return True
-        return False
-        pass
+        passou_barra_direita = self.posicao_x > int(janela.getWidth() + 50)
+        return passou_barra_direita
 
     def verificar_ponto_dir(self) -> None:
-
-        if self.posicao_x < -50:
-            return True
-        return False
-        pass
-
-        
+        passou_barra_esquerda = self.posicao_x < -50
+        return passou_barra_esquerda
 
     def reset_bolinha(self, janela: GraphWin) -> None:
-
         self.posicao_x = int(janela.getWidth() / 2)
         self.posicao_y = int(janela.getHeight() / 2)
         self.velocidade_x = 10
         self.velocidade_y = 10
         self.raio = 10
 
-        pass
