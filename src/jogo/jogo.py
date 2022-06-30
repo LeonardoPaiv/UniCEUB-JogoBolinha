@@ -53,8 +53,6 @@ class Jogo:
 
         while not partida_encerrada:
 
-            tecla = janela.checkKey()
-
             # TODO Chamar o método "self.__desenhar" para desenhar o
             # TODO jogo em seu estado atual.
             self.__desenhar(janela, desenhar_campo= False, desenhar_placar= False)
@@ -101,26 +99,18 @@ class Jogo:
             # ! principal, comando do jogador da esquerda e comando do
             # ! jogador da direita.
 
-            if tecla == 'Up': 
-                self.barra_direita.apagar_desenho()
-                self.barra_direita.decrementar_posicao_Y()
-                self.barra_direita.desenhar(janela)
+            tecla = janela.checkKey()
 
-            if tecla == 'Down': 
-                self.barra_direita.apagar_desenho()
-                self.barra_direita.incrementar_posicao_y()
-                self.barra_direita.desenhar(janela)
 
-            if tecla == 'w' or tecla == 'W': 
-                self.barra_esquerda.apagar_desenho()
-                self.barra_esquerda.decrementar_posicao_Y()
-                self.barra_esquerda.desenhar(janela)
+            Movimentar = {
+                "up": self.barra_direita.subir,
+                "down": self.barra_direita.descer,
+                "w": self.barra_esquerda.subir,
+                "s":  self.barra_esquerda.descer,
+            }
 
-            if tecla == 's' or tecla == 'S': 
-                self.barra_esquerda.apagar_desenho()
-                self.barra_esquerda.incrementar_posicao_y()
-                self.barra_esquerda.desenhar(janela)
-
+            if tecla.lower() in Movimentar:
+                Movimentar[tecla.lower()](janela)
 
             if self.placar.pontuacao_esquerda == 10:
                 partida_encerrada = True
