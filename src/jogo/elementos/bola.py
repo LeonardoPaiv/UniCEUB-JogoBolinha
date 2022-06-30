@@ -84,7 +84,43 @@ class Bola:
         "self.velocidade_x" e "self.velocidade_y"
         """
         self.posicao_x += self.velocidade_x
-        self.posicao_y += self.velocidade_y
+        self.posicao_y += self.velocidade_y  
+
+    def verificar_interseccao_barra(self, barra: Barra):
+        inicio_vertical_barra = barra.posicao_y
+        final_vertical_barra = barra.posicao_y + barra.altura
+
+        inicio_horizontal_barra = barra.posicao_x
+        fim_horizontal_barra = barra.posicao_x + barra.largura
+
+        inicio_horizontal_bola = self.posicao_x - self.raio
+        final_horizontal_bola = self.posicao_x + self.raio
+
+        inicio_vertical_bola = self.posicao_y - self.raio
+        final_vertical_bola = self.posicao_y + self.raio
+
+        def colidiu_barra(coordenada_bola, orientacao):
+            if (orientacao == "horizontal"):
+                return coordenada_bola <= fim_horizontal_barra and coordenada_bola >= inicio_horizontal_barra
+            else:
+                return coordenada_bola <= final_vertical_barra and coordenada_bola >= inicio_vertical_barra
+
+        def vai_colidir_barra():
+            vai_colidir_indo_direita = (final_horizontal_bola < inicio_horizontal_barra 
+                                        and final_horizontal_bola + self.velocidade_x >= inicio_horizontal_barra)
+            vai_colidir_indo_esquerda = (inicio_horizontal_bola > fim_horizontal_barra 
+                                        and inicio_horizontal_bola + self.velocidade_x <= fim_horizontal_barra)
+            return vai_colidir_indo_direita or vai_colidir_indo_esquerda
+
+        is_encostando_horizontal = (colidiu_barra(inicio_horizontal_bola, "horizontal") 
+                                    or colidiu_barra(final_horizontal_bola, "horizontal")
+                                    or vai_colidir_barra())
+        is_encostando_vertical = (colidiu_barra(inicio_vertical_bola, "vertical") 
+                                    or colidiu_barra(final_vertical_bola, "vertical"))
+
+        is_encostando = is_encostando_horizontal and is_encostando_vertical
+
+        return is_encostando
 
     def verificar_colisao(self, barra_esq: Barra, barra_dir: Barra, janela: GraphWin):
         """Verifica se alguma região da bola está em conflito com a
@@ -103,7 +139,10 @@ class Bola:
         colisao_barra_esq = self.verificar_interseccao_barra(barra_esq)
         colisao_barra_dir = self.verificar_interseccao_barra(barra_dir)
 
-        if colisao_barra_esq or colisao_barra_dir: self.velocidade_x = -(self.velocidade_x)
+        if colisao_barra_esq or colisao_barra_dir:
+            sinal_velocidade = self.velocidade_x / abs(self.velocidade_x)
+            nova_velocidade = self.velocidade_x + 3 * sinal_velocidade
+            self.velocidade_x = -(nova_velocidade)
 
         colisao_campo = self.verificar_interseccao_campo(janela)
         
@@ -119,34 +158,6 @@ class Bola:
         if ponto_jogador_dir:
             self.reset_bolinha(janela)
             return 'ponto_dir'
-         
-
-    
-    def verificar_interseccao_barra(self, barra: Barra):
-        inicio_vertical_barra = barra.posicao_y
-        final_vertical_barra = barra.posicao_y + barra.altura
-
-        inicio_horizontal_barra = barra.posicao_x
-        fim_horizontal_barra = barra.posicao_x + barra.largura
-
-        inicio_horizontal_bola = self.posicao_x - self.raio
-        final_horizontal_bola = self.posicao_x + self.raio
-
-        inicio_vertical_bola = self.posicao_y - self.raio
-        final_vertical_bola = self.posicao_y + self.raio
-
-        def is_encostando_barra(coordenada_bola, orientacao):
-            if (orientacao == "horizontal"):
-                return coordenada_bola <= fim_horizontal_barra and coordenada_bola >= inicio_horizontal_barra
-            else:
-                return coordenada_bola <= final_vertical_barra and coordenada_bola >= inicio_vertical_barra
-
-        is_encostando_horizontal = is_encostando_barra(inicio_horizontal_bola, "horizontal") or is_encostando_barra(final_horizontal_bola, "horizontal")
-        is_encostando_vertical = is_encostando_barra(inicio_vertical_bola, "vertical") or is_encostando_barra(final_vertical_bola, "vertical")
-
-        is_encostando = is_encostando_horizontal and is_encostando_vertical
-
-        return is_encostando
 
     def verificar_interseccao_campo(self, janela: GraphWin) -> bool:
         inicio_horizontal_bola = self.posicao_y - self.raio
