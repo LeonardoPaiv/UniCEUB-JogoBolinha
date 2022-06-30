@@ -1,4 +1,5 @@
 from graphics import GraphWin
+import json
 
 
 class Ranking:
@@ -19,17 +20,21 @@ class Ranking:
         """
         # TODO carregar dados do ranking a partir do arquivo
         # TODO ranking.json da pasta dados "self.__carregar_dados"
+        with open(self._endereco_dados, 'r') as endereco:
+            self._dados = json.load(endereco)
 
         # TODO desenhar ranking chamando o método "self.__desenhar"
-
+        self.__desenhar(janela)
         # Loop de leitura do ranking
         voltar = False
         while not voltar:
             # TODO ler tecla do jogador
-
+            tecla = janela.checkKey()
             # TODO caso a tecla seja enter "Return", atualizar a
             # TODO variável "voltar" para True (pois o jogador deseja
             # TODO retornar ao menu principal)
+            if tecla == 'Return':
+                voltar = True
             break
 
         pass

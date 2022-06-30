@@ -66,6 +66,7 @@ class Menu:
             if tecla == 'Return':
                 self.__executar_acao()
                 selecionado = True
+        self.__apagar()
                 
 
     def __desenhar(self, janela: GraphWin, em_jogo: bool = False) -> None:
@@ -85,6 +86,7 @@ class Menu:
         for item in self._itens:
             self.texts.append(Text(Point(300, y), item))
             y += 100
+            self.texts[-1].setSize(25)
             self.texts[-1].draw(janela)
 
     def __executar_acao(self) -> None:
