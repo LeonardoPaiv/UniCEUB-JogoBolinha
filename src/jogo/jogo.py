@@ -21,8 +21,8 @@ class Jogo:
 
 
     def __init__(self, janela) -> None:
-        self.jogador_esquerda = Jogador()
-        self.jogador_direita = Jogador()
+        self.jogador_esquerda = Jogador(janela)
+        self.jogador_direita = Jogador(janela)
         self.bola = Bola()
         self.barra_esquerda = Barra(velocidade_y= 40, cor= 'pink')
         self.barra_direita = Barra(velocidade_y= 40, cor= 'purple')
