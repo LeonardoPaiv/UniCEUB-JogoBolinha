@@ -1,5 +1,6 @@
 
-from graphics import GraphWin
+from typing import Text
+from graphics import GraphWin, Point
 from src.jogo.elementos.barra import Barra
 from src.jogo.elementos.bola import Bola
 from src.jogo.jogador.jogador import Jogador
@@ -20,9 +21,9 @@ class Jogo:
     placar: Placar
 
 
-    def __init__(self, janela) -> None:
-        self.jogador_esquerda = Jogador(janela)
-        self.jogador_direita = Jogador(janela)
+    def __init__(self, janela: GraphWin) -> None:
+        self.jogador_esquerda = Jogador(janela,"esquerda")
+        self.jogador_direita = Jogador(janela, "direita")
         self.bola = Bola()
         self.barra_esquerda = Barra(velocidade_y= 40, cor= 'pink')
         self.barra_direita = Barra(velocidade_y= 40, cor= 'purple')

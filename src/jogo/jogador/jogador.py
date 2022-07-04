@@ -8,12 +8,14 @@ class Jogador:
     caixa: Entry
     erro: Text
 
-    def __init__(self, janela: GraphWin) -> None:
+    def __init__(self, janela: GraphWin, id: str) -> None:
         self.nome = ""
         self.pontuacao = 0
         self.caixa = Entry(Point(janela.width/2, janela.height/2), 100)
         self.caixa.setFill("white")
-        self.erro = Text(Point(janela.width/2,janela.height/4), "Nome do jogador não pode ser vazio")
+        self.erro = Text(Point(janela.width/2,janela.height/1.5), "Nome do jogador não pode ser vazio")
+        self.texto = Text(Point(janela.width/2, janela.height/4),"Digite o nome do jogador " +id)
+
 
     def rodar(self, janela: GraphWin) -> None:
         """Roda a parte do jogo que define o jogador.
@@ -52,6 +54,7 @@ class Jogador:
         # TODO Extrair texto do objeto Entry e armazenar em "self.nome"
         self.caixa.undraw()
         self.erro.undraw()
+        self.texto.undraw()
         
     
 
@@ -63,7 +66,7 @@ class Jogador:
             executado.
         """
         # TODO Limpa a janela.
-        
+        self.texto.draw(janela)
 
         # TODO Desenha campo onde o jogador digita seu nome usando Entry
         self.caixa.draw(janela)
@@ -74,7 +77,7 @@ class Jogador:
         # TODO Desenha botão "OK" ou "Continuar" ou "Pronto" caso
         # TODO desejado. A ideia é que o jogador pressione "Enter" para
         # TODO prosseguir.
-        pass
+        
 
     def incrementar_pontuacao(self):
         """Incrementa a pontuação do jogador.
