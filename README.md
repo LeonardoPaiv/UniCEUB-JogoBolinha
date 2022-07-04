@@ -143,11 +143,9 @@ professor.
   - Silvino
  - [ ] Adicionar tela: Parabéns, jogador i ganhou.
   - Silvino
- - [ ] Variação do tamanho da barra a cada ponto. A cada ponto tomado, a barra aumenta e a cada ponto feito, a barra diminui.
+ - [X] Variação do tamanho da barra a cada ponto. A cada ponto tomado, a barra aumenta e a cada ponto feito, a barra diminui.
   - João Patinho
- - [ ] Aumento da velocidade da bolinha a cada rebatida. Velocidade reseta quando troca o round.
-  - João Patinho
- - [ ] Diminuir tamanho da bolinha a cada round.
+ - [X] Aumento da velocidade da bolinha a cada rebatida. Velocidade reseta quando troca o round.
   - João Patinho
  - [ ] Round bricks by bricks: Adicionar função para adicionar blocos no campo do jogador.
   - Cabral
@@ -157,8 +155,6 @@ professor.
   - Cabral
  - [ ] Round bricks by bricks: Implementar round no decorrer do jogo (round aleatório a partir da pontuação Y).
   - Cabral
- - [ ] Adicionar cantos arredondados nas barras.
-  - João Patinho
  - [ ] Implementar mudança de trajetória da bolinha com base no vetor normal à superfície da barra (manter certo nível de aleatoriedade para garantir que ela não fique estagnada).
   - João Patinho
  - [ ] Implementar efeitos sonoros.

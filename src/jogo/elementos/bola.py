@@ -110,10 +110,12 @@ class Bola:
                                         and final_horizontal_bola + self.velocidade_x >= inicio_horizontal_barra)
             vai_colidir_indo_esquerda = (inicio_horizontal_bola > fim_horizontal_barra 
                                         and inicio_horizontal_bola + self.velocidade_x <= fim_horizontal_barra)
+            # print (f'vai colidir direita{vai_colidir_indo_direita}')
+            # print (f'vai colidir esquerda{vai_colidir_indo_esquerda}')
             return vai_colidir_indo_direita or vai_colidir_indo_esquerda
-
-        is_encostando_horizontal = (colidiu_barra(inicio_horizontal_bola, "horizontal") 
-                                    or colidiu_barra(final_horizontal_bola, "horizontal")
+            
+        is_encostando_horizontal = (final_horizontal_bola == inicio_horizontal_barra
+                                    or inicio_horizontal_bola == fim_horizontal_barra
                                     or vai_colidir_barra())
         is_encostando_vertical = (colidiu_barra(inicio_vertical_bola, "vertical") 
                                     or colidiu_barra(final_vertical_bola, "vertical"))
@@ -141,7 +143,7 @@ class Bola:
 
         if colisao_barra_esq or colisao_barra_dir:
             sinal_velocidade = self.velocidade_x / abs(self.velocidade_x)
-            nova_velocidade = self.velocidade_x + 3 * sinal_velocidade
+            nova_velocidade = self.velocidade_x + 3 * sinal_velocidade # 3 é a taxa de aceleração
             self.velocidade_x = -(nova_velocidade)
 
         colisao_campo = self.verificar_interseccao_campo(janela)

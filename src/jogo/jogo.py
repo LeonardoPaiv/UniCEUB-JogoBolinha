@@ -10,7 +10,6 @@ import time
 
 from src.ranking.ranking import Ranking
 
-
 class Jogo:
 
     jogador_esquerda: Jogador
@@ -19,7 +18,6 @@ class Jogo:
     barra_esquerda: Barra
     barra_direita: Barra
     placar: Placar
-
 
     def __init__(self, janela: GraphWin) -> None:
         self.jogador_esquerda = Jogador(janela,"esquerda")
@@ -112,7 +110,7 @@ class Jogo:
             }
 
             if tecla.lower() in Movimentar:
-                Movimentar[tecla.lower()](janela)
+                Movimentar[tecla.lower()](janela, self.campo)
 
             if self.placar.pontuacao_esquerda == 10:
                 partida_encerrada = True
@@ -173,10 +171,10 @@ class Jogo:
             desenhado.
         """
 
-        campo = Campo(janela)
+        self.campo = Campo(janela)
 
         if desenhar_campo: 
-            campo.desenhar_margens(janela)
+            self.campo.desenhar_margens(janela)
             self.barra_direita.posicao_inicial_dir(janela)
             self.barra_direita.desenhar(janela)
             self.barra_esquerda.posicao_inicial_esq(janela)
