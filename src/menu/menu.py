@@ -31,46 +31,19 @@ class Menu:
         # TODO preencher lista de itens do menu "self._itens".
         # ! Caso um jogo esteja acontecendo, incluir a opção
         # ! "continuar". Caso contrário, não incluir essa opção.
-        itensmenu = ['Iniciar', 'Ranking', 'Sair']
-        self._itens.extend(itensmenu)
-        if em_jogo == True:
-            self._itens.remove('Iniciar')
-            self._itens.insert(0, 'Continuar')
+        if em_jogo:
+            self._itens = ['Continuar']
+        else:
+            self._itens = ['Iniciar']
+        self._itens.extend(['Ranking', 'Sair'])
         # Loop de leitura do menu
         selecionado = False
         mudanca_de_opcao = False
         self.__desenhar(janela)
         while not selecionado:
             # TODO desenhar menu chamando o método "self.__desenhar"
-            
-
             # TODO ler tecla do jogador
             tecla = janela.checkKey()
-
-            # TODO caso a tecla seja a seta para cima "Up" ou "w",
-            # TODO decrementar "self._i_selecao".
-            # ! Caso "self._i_selecao" seja menor que a quantidade de
-            # ! opções, não decrementar ou reiniciar do final da lista.
-            if tecla == 'Up' or tecla == 'W' or tecla == 'w' and self._i_selecao >= 0:
-                self._i_selecao -= 1
-                mudanca_de_opcao = True
-
-
-            # TODO caso a tecla seja a seta para baixo "Down" ou "s",
-            # TODO incrementar "self._i_selecao".
-            # ! Caso "self._i_selecao" seja maior que a quantidade de
-            # ! opções, não incrementar ou reiniciar do início da lista.
-            if tecla == 'Down' or tecla == 'S' or tecla == 's' and self._i_selecao <= 2:
-                self._i_selecao += 1
-                mudanca_de_opcao = True
-
-            if self._i_selecao > 2:
-                self._i_selecao = 0
-                mudanca_de_opcao = True
-
-            if self._i_selecao < 0:
-                self._i_selecao = 2
-                mudanca_de_opcao = True
 
             # TODO caso a tecla seja enter "Return", chamar o método
             # TODO "self.__executar_acao" e atualizar a variável
@@ -79,115 +52,39 @@ class Menu:
             if tecla == 'Return':
                 self.__executar_acao()
                 selecionado = True
-            
+
+            # TODO caso a tecla seja a seta para cima "Up" ou "w",
+            # TODO decrementar "self._i_selecao".
+            # ! Caso "self._i_selecao" seja menor que a quantidade de
+            # ! opções, não decrementar ou reiniciar do final da lista.
+            if tecla == 'Up' or tecla == 'W' or tecla == 'w' \
+                    and self._i_selecao >= 0:
+                self._i_selecao -= 1
+                mudanca_de_opcao = True
+
+            if self._i_selecao < 0:
+                self._i_selecao = len(self._itens)-1
+                mudanca_de_opcao = True
+
+            # TODO caso a tecla seja a seta para baixo "Down" ou "s",
+            # TODO incrementar "self._i_selecao".
+            # ! Caso "self._i_selecao" seja maior que a quantidade de
+            # ! opções, não incrementar ou reiniciar do início da lista.
+            if tecla == 'Down' or tecla == 'S' or tecla == 's' \
+                    and self._i_selecao < len(self._itens):
+                self._i_selecao += 1
+                mudanca_de_opcao = True
+
+            if self._i_selecao > len(self._itens)-1:
+                self._i_selecao = 0
+                mudanca_de_opcao = True
+
             if mudanca_de_opcao:
-                if em_jogo == False:
-                    if self._itens[self._i_selecao] == 'Iniciar':
-
-                        self.texts[0].undraw()
-                        self.texts[0].setSize(30)
-                        self.texts[0].setFill('lime')
-                        self.texts[0].draw(janela)
-
-                        self.texts[1].undraw()
-                        self.texts[1].setSize(25)
-                        self.texts[1].setFill('black')
-                        self.texts[1].draw(janela)
-
-                        self.texts[2].undraw()
-                        self.texts[2].setSize(25)
-                        self.texts[2].setFill('black')
-                        self.texts[2].draw(janela)
-
-                    elif self._itens[self._i_selecao] == 'Ranking':
-
-                        self.texts[0].undraw()
-                        self.texts[0].setSize(25)
-                        self.texts[0].setFill('black')
-                        self.texts[0].draw(janela)
-
-                        self.texts[1].undraw()
-                        self.texts[1].setSize(30)
-                        self.texts[1].setFill('lime')
-                        self.texts[1].draw(janela)
-
-                        self.texts[2].undraw()
-                        self.texts[2].setSize(25)
-                        self.texts[2].setFill('black')
-                        self.texts[2].draw(janela)
-
-                    elif self._itens[self._i_selecao] == 'Sair':
-
-                        self.texts[0].undraw()
-                        self.texts[0].setSize(25)
-                        self.texts[0].setFill('black')
-                        self.texts[0].draw(janela)
-
-                        self.texts[1].undraw()
-                        self.texts[1].setSize(25)
-                        self.texts[1].setFill('black')
-                        self.texts[1].draw(janela)
-
-                        self.texts[2].undraw()
-                        self.texts[2].setSize(30)
-                        self.texts[2].setFill('lime')
-                        self.texts[2].draw(janela)
-                    
-                elif em_jogo == True:
-                    if self._itens[self._i_selecao] == 'Continuar':
-
-                        self.texts[0].undraw()
-                        self.texts[0].setSize(30)
-                        self.texts[0].setFill('lime')
-                        self.texts[0].draw(janela)
-
-                        self.texts[1].undraw()
-                        self.texts[1].setSize(25)
-                        self.texts[1].setFill('black')
-                        self.texts[1].draw(janela)
-
-                        self.texts[2].undraw()
-                        self.texts[2].setSize(25)
-                        self.texts[2].setFill('black')
-                        self.texts[2].draw(janela)
-
-                    elif self._itens[self._i_selecao] == 'Ranking':
-
-                        self.texts[0].undraw()
-                        self.texts[0].setSize(25)
-                        self.texts[0].setFill('black')
-                        self.texts[0].draw(janela)
-
-                        self.texts[1].undraw()
-                        self.texts[1].setSize(30)
-                        self.texts[1].setFill('lime')
-                        self.texts[1].draw(janela)
-
-                        self.texts[2].undraw()
-                        self.texts[2].setSize(25)
-                        self.texts[2].setFill('black')
-                        self.texts[2].draw(janela)
-
-                    elif self._itens[self._i_selecao] == 'Sair':
-
-                        self.texts[0].undraw()
-                        self.texts[0].setSize(25)
-                        self.texts[0].setFill('black')
-                        self.texts[0].draw(janela)
-
-                        self.texts[1].undraw()
-                        self.texts[1].setSize(25)
-                        self.texts[1].setFill('black')
-                        self.texts[1].draw(janela)
-
-                        self.texts[2].undraw()
-                        self.texts[2].setSize(30)
-                        self.texts[2].setFill('lime')
-                        self.texts[2].draw(janela)
-
+                self.__apagar()
+                self.__desenhar(janela)
                 mudanca_de_opcao = False
+
         self.__apagar()
-                
 
     def __desenhar(self, janela: GraphWin) -> None:
         """Desenha o menu na tela do jogo. Os itens do menu estão
@@ -203,10 +100,19 @@ class Menu:
         # TODO "self._itens".
         # ! A opção selecionada "self._i_selecao" deve ser destacada.
         y = janela.height / 5
-        for item in self._itens:
+        for i in range(len(self._itens)):
+
+            item = self._itens[i]
             self.texts.append(Text(Point(janela.width / 2, y), item))
             y += janela.height / 5
-            self.texts[-1].setSize(25)
+
+            if self._i_selecao == i:
+                self.texts[-1].setSize(30)
+                self.texts[-1].setFill('lime')
+            else:
+                self.texts[-1].setSize(25)
+                self.texts[-1].setFill('black')
+
             self.texts[-1].draw(janela)
 
     def __executar_acao(self) -> None:
@@ -229,8 +135,6 @@ class Menu:
         # TODO True caso "self.itens" de "self._i_selecao" seja sair
         if self._itens[self._i_selecao] == 'Sair':
             self.sair = True
-
-        
 
     def __apagar(self) -> None:
         for i in range(len(self.texts)):
