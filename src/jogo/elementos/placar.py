@@ -42,8 +42,7 @@ class Placar:
         """
         self.pontuacao_esquerda += 1
         self.apagar_placar_jogo()
-        self.desenhar(janela) 
-
+        self.desenhar(janela)
 
     def soma_ponto_player_dir(self, janela):
         """Soma ponto para o jogador da direita
@@ -51,7 +50,6 @@ class Placar:
         self.pontuacao_direita += 1
         self.apagar_placar_jogo()
         self.desenhar(janela)
-
 
     def apagar_placar_jogo(self):
         """Apaga o desenho do placar.

@@ -75,7 +75,8 @@ class Bola:
             (pode ser negativo).
         """
         # TODO Garantir que raio não é zero ou negativo
-        if (self.raio + incremento) <= 0: return
+        if (self.raio + incremento) <= 0:
+            return
 
         self.raio += incremento
 
@@ -84,7 +85,7 @@ class Bola:
         "self.velocidade_x" e "self.velocidade_y"
         """
         self.posicao_x += self.velocidade_x
-        self.posicao_y += self.velocidade_y  
+        self.posicao_y += self.velocidade_y
 
     def verificar_interseccao_barra(self, barra: Barra):
         inicio_vertical_barra = barra.posicao_y
@@ -124,7 +125,12 @@ class Bola:
 
         return is_encostando
 
-    def verificar_colisao(self, barra_esq: Barra, barra_dir: Barra, janela: GraphWin):
+    def verificar_colisao(
+            self,
+            barra_esq: Barra,
+            barra_dir: Barra,
+            janela: GraphWin
+            ) -> str:
         """Verifica se alguma região da bola está em conflito com a
         barra nas coordenadas atuais.
 
@@ -134,7 +140,7 @@ class Bola:
         # TODO chamar método "self.verificar_interseccao_barra" para avaliar
         # TODO se a posição atual da bolina intersecta com a posição da
         # TODO barra em questão.
-        
+
         # TODO ajustar posição e velocidades da bolinha caso haja
         # TODO colisão
 
@@ -147,7 +153,7 @@ class Bola:
             self.velocidade_x = -(nova_velocidade)
 
         colisao_campo = self.verificar_interseccao_campo(janela)
-        
+
         if colisao_campo: self.velocidade_y = -(self.velocidade_y)
 
         ponto_jogador_esq = self.verificar_ponto_esq(janela)
@@ -183,4 +189,3 @@ class Bola:
         self.velocidade_x = 10
         self.velocidade_y = 10
         self.raio = 10
-

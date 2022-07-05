@@ -130,9 +130,15 @@ class Jogo:
                 self.barra_esquerda.apagar_desenho()
                 self.barra_direita.apagar_desenho()
                 self.placar.apagar_placar_jogo()
+
                 menu = Menu()
-                menu.rodar(janela, True)
+                while not menu.continuar and not menu.sair:
+                    if menu.ranking:
+                        ranking = Ranking()
+                        ranking.rodar(janela)
+                    menu.rodar(janela, True)
                 sair = menu.sair
+
                 self.barra_esquerda.desenhar(janela)
                 self.barra_direita.desenhar(janela)
                 self.placar.desenhar(janela)
@@ -197,6 +203,7 @@ class Jogo:
             janela)
 
         if jogador_pontuou == 'ponto_esq':
+            self.jogador_esquerda.incrementar_pontuacao()
             self.placar.soma_ponto_player_esq(janela)
             self.placar.apagar_placar_jogo()
             self.placar.desenhar(janela)
@@ -205,6 +212,7 @@ class Jogo:
             self.barra_direita.alterar_altura(janela, 20)
 
         if jogador_pontuou == 'ponto_dir':
+            self.jogador_direita.incrementar_pontuacao()
             self.placar.soma_ponto_player_dir(janela)
             self.placar.apagar_placar_jogo()
             self.placar.desenhar(janela)

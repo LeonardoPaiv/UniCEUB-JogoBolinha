@@ -12,7 +12,6 @@ class Ranking:
         self._endereco_dados = endereco_dados
         self._dados = {}
         self._rank = []
-        
 
     def rodar(self, janela: GraphWin) -> None:
         """Roda o ranking do jogo.
@@ -50,7 +49,6 @@ class Ranking:
         # TODO "self._dados".
         with open('data\\ranking.json', 'r') as data:
             self._dados = json.load(data)
-        
 
     def __desenhar(self, janela: GraphWin) -> None:
         """Desenha o ranking na janela do jogo.
@@ -60,7 +58,7 @@ class Ranking:
             executado.
         """
         # TODO Limpa a janela.
-        
+
         # TODO Ordena e desenha a lista do ranking. Desenhar nomes e
         # TODO quantidades de partidas ganhas.
         ordem = sorted(self._dados, key=self._dados.get, reverse=True)
@@ -84,12 +82,13 @@ class Ranking:
         self.__carregar_dados()
         # TODO Modificar "self._dados" para registrar a nova vitória do
         # TODO jogador.
-        self._dados[nome_jogador] = +1
+        if nome_jogador not in self._dados.keys():
+            self._dados[nome_jogador] = 0
+        self._dados[nome_jogador] += 1
         # TODO Abrir o arquivo json em modo escrita e reescrever seu conteúdo
         # TODO de acordo com os dados atualizados.
         with open('data\\ranking.json', 'w') as jsonfile:
             json.dump(self._dados, jsonfile)
-        
 
     def __apagar(self) -> None:
         for i in range(len(self._rank)):
