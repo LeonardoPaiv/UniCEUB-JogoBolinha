@@ -18,9 +18,6 @@ def rodar():
     janela_altura = tela_altura/2
     janela = GraphWin("Nosso Pong", janela_largura, janela_altura)
 
-    #jogo = Jogo(janela)
-    #jogo.rodar(janela)
-
     # Loop do programa
     sair = False
     while not sair:
@@ -28,7 +25,7 @@ def rodar():
         menu.rodar(janela)
         if menu.iniciar:
             jogo = Jogo(janela)
-            sair = jogo.rodar(janela)
+            jogo.rodar(janela)
         elif menu.ranking:
             ranking = Ranking(janela)
             ranking.rodar(janela)

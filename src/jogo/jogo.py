@@ -1,6 +1,5 @@
 
-from typing import Text
-from graphics import GraphWin, Point, Rectangle
+from graphics import GraphWin
 from src.jogo.elementos.barra import Barra
 from src.jogo.elementos.bola import Bola
 from src.jogo.jogador.jogador import Jogador
@@ -48,7 +47,6 @@ class Jogo:
         self.__desenhar(janela, True, True)
 
         # Loop do jogo
-        nome_vencedor = ""
         sair = False
         partida_encerrada = False
 
@@ -116,18 +114,14 @@ class Jogo:
                 partida_encerrada = True
 
             if partida_encerrada:
-                self.bola.apagar_desenho()
-                self.barra_esquerda.apagar_desenho()
-                self.barra_direita.apagar_desenho()
-                self.placar.apagar_placar_jogo()
-                # Atualiza o ranking de jogadores
+                self.__apagar()
+                # Atualiza e mostra o ranking de jogadores
                 ranking = Ranking()
                 if self.jogador_direita.pontuacao \
                         > self.jogador_esquerda.pontuacao:
                     ranking.atualizar_dados(self.jogador_direita.nome)
                 else:
                     ranking.atualizar_dados(self.jogador_esquerda.nome)
-                # Mostra o ranking de jogadores
                 ranking.rodar(janela)
 
             if tecla == 'Escape':
@@ -137,12 +131,12 @@ class Jogo:
                 self.placar.apagar_placar_jogo()
                 menu = Menu()
                 menu.rodar(janela, True)
-                if menu.sair:
-                    return True
+                sair = menu.sair
                 self.barra_esquerda.desenhar(janela)
                 self.barra_direita.desenhar(janela)
                 self.placar.desenhar(janela)
 
+        self.__apagar()
         return sair
 
     def __definir_jogadores(self, janela: GraphWin) -> None:
@@ -154,6 +148,12 @@ class Jogo:
         """
         self.jogador_esquerda.rodar(janela)
         self.jogador_direita.rodar(janela)
+
+    def __apagar(self) -> None:
+        self.bola.apagar_desenho()
+        self.barra_esquerda.apagar_desenho()
+        self.barra_direita.apagar_desenho()
+        self.placar.apagar_placar_jogo()
 
     def __desenhar(
             self,
