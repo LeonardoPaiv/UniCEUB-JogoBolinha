@@ -11,6 +11,7 @@ import time
 
 from src.ranking.ranking import Ranking
 
+
 class Jogo:
 
     jogador_esquerda: Jogador
@@ -21,13 +22,12 @@ class Jogo:
     placar: Placar
 
     def __init__(self, janela: GraphWin) -> None:
-        self.jogador_esquerda = Jogador(janela,"esquerda")
+        self.jogador_esquerda = Jogador(janela, "esquerda")
         self.jogador_direita = Jogador(janela, "direita")
         self.bola = Bola()
-        self.barra_esquerda = Barra(velocidade_y= 40, cor= 'pink')
-        self.barra_direita = Barra(velocidade_y= 40, cor= 'purple')
+        self.barra_esquerda = Barra(velocidade_y=40, cor='pink')
+        self.barra_direita = Barra(velocidade_y=40, cor='purple')
         self.placar = Placar(janela)
-    
 
     def rodar(self, janela: GraphWin) -> None:
         """_summary_
@@ -45,25 +45,23 @@ class Jogo:
         # TODO Chamar o método "self.__desenhar" para desenhar o
         # TODO jogo completo (desenhar campo e placar).
 
-        self.__desenhar(janela, desenhar_campo= True, desenhar_placar= True);
-
+        self.__desenhar(janela, True, True)
 
         # Loop do jogo
         nome_vencedor = ""
         sair = False
         partida_encerrada = False
 
-        while not partida_encerrada:
+        while not partida_encerrada and not sair:
 
             # TODO Chamar o método "self.__desenhar" para desenhar o
             # TODO jogo em seu estado atual.
-            self.__desenhar(janela, desenhar_campo= False, desenhar_placar= False)
+            self.__desenhar(janela, False, False)
             self.bola.incrementar_posicao()
             self.bola.apagar_desenho()
 
             # TODO verificar colisão entre bola e paredes/barras usando
             # TODO o método "self.bola.verificar_colisao"
-
 
             # TODO caso haja colisão com uma das barras:
             # ? atualizar velocidade da bola?
@@ -103,33 +101,34 @@ class Jogo:
 
             tecla = janela.checkKey()
 
-            Movimentar = {
+            movimentar = {
                 "up": self.barra_direita.subir,
                 "down": self.barra_direita.descer,
                 "w": self.barra_esquerda.subir,
                 "s":  self.barra_esquerda.descer,
             }
 
-            if tecla.lower() in Movimentar:
-                Movimentar[tecla.lower()](janela, self.campo)
+            if tecla.lower() in movimentar:
+                movimentar[tecla.lower()](janela, self.campo)
 
-            if self.placar.pontuacao_esquerda == 10:
+            if self.placar.pontuacao_esquerda == 10 \
+                    or self.placar.pontuacao_direita == 10:
                 partida_encerrada = True
 
-            if self.placar.pontuacao_direita == 10:
-                partida_encerrada = True
-
-            if partida_encerrada: 
+            if partida_encerrada:
                 self.bola.apagar_desenho()
                 self.barra_esquerda.apagar_desenho()
                 self.barra_direita.apagar_desenho()
                 self.placar.apagar_placar_jogo()
-                janela.getMouse()
+                # Atualiza o ranking de jogadores
                 ranking = Ranking()
+                if self.jogador_direita.pontuacao \
+                        > self.jogador_esquerda.pontuacao:
+                    ranking.atualizar_dados(self.jogador_direita.nome)
+                else:
+                    ranking.atualizar_dados(self.jogador_esquerda.nome)
+                # Mostra o ranking de jogadores
                 ranking.rodar(janela)
-
-
-                nome_vencedor = "1"
 
             if tecla == 'Escape':
                 self.bola.apagar_desenho()
@@ -144,19 +143,7 @@ class Jogo:
                 self.barra_direita.desenhar(janela)
                 self.placar.desenhar(janela)
 
-            if self.placar.pontuacao_direita == 10:
-                partida_encerrada = True
-                nome_vencedor = "2"
-
-            # TODO Inicializar menu com parâmetro "em_jogo" = True em
-            # TODO caso de "escape". Setar variável sair = menu.sair.
-            # TODO caso contiuar, chamar o método "self.__desenhar"
-            # TODO para desenhar o jogo completo (desenhar campo e
-            # TODO placar).
-            sair = False
-            #break
-
-        return sair, nome_vencedor
+        return sair
 
     def __definir_jogadores(self, janela: GraphWin) -> None:
         """Define os jogadores que jogarão a partida atual.
@@ -187,7 +174,7 @@ class Jogo:
 
         self.campo = Campo(janela)
 
-        if desenhar_campo: 
+        if desenhar_campo:
             self.campo.desenhar_margens(janela)
             self.barra_direita.posicao_inicial_dir(janela)
             self.barra_direita.desenhar(janela)
@@ -195,18 +182,20 @@ class Jogo:
             self.barra_esquerda.desenhar(janela)
             self.bola.reset_bolinha(janela)
             self.bola.desenhar(janela)
+
         if desenhar_placar:
             self.placar.apagar_placar_jogo()
             self.placar.desenhar(janela)
+
         self.bola.apagar_desenho()
-        
-
-
         self.bola.desenhar(janela)
 
-        jogador_pontuou = self.bola.verificar_colisao(self.barra_esquerda, self.barra_direita, janela)
+        jogador_pontuou = self.bola.verificar_colisao(
+            self.barra_esquerda,
+            self.barra_direita,
+            janela)
 
-        if jogador_pontuou == 'ponto_esq': 
+        if jogador_pontuou == 'ponto_esq':
             self.placar.soma_ponto_player_esq(janela)
             self.placar.apagar_placar_jogo()
             self.placar.desenhar(janela)
@@ -214,7 +203,7 @@ class Jogo:
             self.barra_esquerda.alterar_altura(janela, -20)
             self.barra_direita.alterar_altura(janela, 20)
 
-        if jogador_pontuou == 'ponto_dir': 
+        if jogador_pontuou == 'ponto_dir':
             self.placar.soma_ponto_player_dir(janela)
             self.placar.apagar_placar_jogo()
             self.placar.desenhar(janela)
@@ -237,7 +226,5 @@ class Jogo:
 
         # TODO limpar bola (self)
         # TODO desenhar bola (self)
-        #janela.getMouse()
-        time.sleep(0.06)
 
-        pass
+        time.sleep(0.06)
