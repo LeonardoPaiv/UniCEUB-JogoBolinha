@@ -1,5 +1,5 @@
 
-from graphics import GraphWin
+from graphics import GraphWin, Point, Text
 from src.jogo.elementos.barra import Barra
 from src.jogo.elementos.bola import Bola
 from src.jogo.jogador.jogador import Jogador
@@ -121,9 +121,17 @@ class Jogo:
                 if self.jogador_direita.pontuacao \
                         > self.jogador_esquerda.pontuacao:
                     ranking.atualizar_dados(self.jogador_direita.nome)
+                    ganhador = self.jogador_direita.nome
                 else:
                     ranking.atualizar_dados(self.jogador_esquerda.nome)
+                    ganhador = self.jogador_esquerda.nome
+                vitorioso = Text(Point(janela.width / 2, janela.height / 2), 'Parabéns {}!\nVocê ganhou!'.format(ganhador))
+                vitorioso.setSize(30)
+                vitorioso.draw(janela)
+                tecla = janela.getKey()
+                vitorioso.undraw()
                 ranking.rodar(janela)
+                    
 
             if tecla == 'Escape':
                 self.bola.apagar_desenho()
