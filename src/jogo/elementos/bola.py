@@ -1,9 +1,7 @@
 
-from io import RawIOBase
-from tokenize import Double
+from random import randint
 from graphics import GraphWin, Circle, Point
 from src.jogo.elementos.barra import Barra
-from src.jogo.elementos.placar import Placar
 
 
 class Bola:
@@ -151,6 +149,7 @@ class Bola:
             sinal_velocidade = self.velocidade_x / abs(self.velocidade_x)
             nova_velocidade = self.velocidade_x + 3 * sinal_velocidade # 3 é a taxa de aceleração
             self.velocidade_x = -(nova_velocidade)
+            self.velocidade_y += randint(-5, 5)
 
         colisao_campo = self.verificar_interseccao_campo(janela)
 
