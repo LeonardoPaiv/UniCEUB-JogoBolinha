@@ -66,20 +66,29 @@ class Barra():
         self.apagar_desenho()
 
         nova_tamanho_porcentagem = self.altura_inical * valor_alteracao / 100
-        
-        if  self.altura > 0.5 * self.altura_inical and self.altura < 1.5 * self.altura_inical:
-            self.altura += nova_tamanho_porcentagem
+        nova_tamanho = self.altura + nova_tamanho_porcentagem
+
+        if  nova_tamanho > 0.5 * self.altura_inical and nova_tamanho < 1.5 * self.altura_inical:
+            self.altura = nova_tamanho
 
         self.desenhar(janela)
 
-    def descer(self, janela):
+    def descer(self, janela, campo):
         """Incrementa a posição no eixo y com base em "self.velocidade"
         """
+        barra_canto_inferior = self.altura + self.posicao_y
+        if (barra_canto_inferior + self.velocidade_y >= campo.limite_inferior):
+            return
+
         self.apagar_desenho()
         self.posicao_y += self.velocidade_y
         self.desenhar(janela)
 
-    def subir(self, janela):
+    def subir(self, janela, campo):
+        barra_canto_superior =  self.posicao_y
+        if (barra_canto_superior - self.velocidade_y <= campo.limite_superior):
+            return
+
         self.apagar_desenho()
         self.posicao_y -= self.velocidade_y
         self.desenhar(janela)

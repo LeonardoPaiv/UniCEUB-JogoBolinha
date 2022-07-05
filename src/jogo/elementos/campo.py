@@ -9,9 +9,11 @@ class Campo():
         self.altura_janela = janela.getHeight()
         self.canto_esquerda = Rectangle(Point(0,0), Point(10, self.altura_janela))
         self.canto_direita = Rectangle(Point(self.largura_janela, 0), Point(self.largura_janela - 10, self.altura_janela))
-        self.canto_superior = Rectangle(Point(0, 0), Point(self.largura_janela, 10))
-        self.canto_inferior = Rectangle(Point(0, self.altura_janela), Point(self.largura_janela, self.altura_janela - 10))
-
+        self.altura_borda = 10
+        self.canto_superior = Rectangle(Point(0, 0), Point(self.largura_janela, self.altura_borda))
+        self.canto_inferior = Rectangle(Point(0, self.altura_janela), Point(self.largura_janela, self.altura_janela - self.altura_borda))
+        self.limite_superior = 0 + self.altura_borda
+        self.limite_inferior = self.altura_janela - self.altura_borda
         pass
 
     def desenhar_margens(self, janela: GraphWin):
