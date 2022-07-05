@@ -1,11 +1,12 @@
 
 from typing import Text
-from graphics import GraphWin, Point
+from graphics import GraphWin, Point, Rectangle
 from src.jogo.elementos.barra import Barra
 from src.jogo.elementos.bola import Bola
 from src.jogo.jogador.jogador import Jogador
 from src.jogo.elementos.campo import Campo
 from src.jogo.elementos.placar import Placar
+from src.menu.menu import Menu
 import time
 
 from src.ranking.ranking import Ranking
@@ -131,6 +132,19 @@ class Jogo:
 
 
                 nome_vencedor = "1"
+
+            if tecla == 'Escape':
+                self.bola.apagar_desenho()
+                self.barra_esquerda.apagar_desenho()
+                self.barra_direita.apagar_desenho()
+                self.placar.apagar_placar_jogo()
+                menu = Menu()
+                menu.rodar(janela, True)
+                if menu.sair:
+                    return True
+                self.barra_esquerda.desenhar(janela)
+                self.barra_direita.desenhar(janela)
+                self.placar.desenhar(janela)
 
             if self.placar.pontuacao_direita == 10:
                 partida_encerrada = True

@@ -1,6 +1,4 @@
 
-
-from hashlib import algorithms_available
 from graphics import GraphWin, tk
 from src.jogo.jogo import Jogo
 from src.menu.menu import Menu
@@ -20,8 +18,8 @@ def rodar():
     janela_altura = tela_altura/2
     janela = GraphWin("Nosso Pong", janela_largura, janela_altura)
 
-    jogo = Jogo(janela)
-    jogo.rodar(janela)
+    #jogo = Jogo(janela)
+    #jogo.rodar(janela)
 
     # Loop do programa
     sair = False
@@ -29,10 +27,10 @@ def rodar():
         menu = Menu()
         menu.rodar(janela)
         if menu.iniciar:
-            jogo = Jogo()
+            jogo = Jogo(janela)
             sair = jogo.rodar(janela)
         elif menu.ranking:
-            ranking = Ranking()
+            ranking = Ranking(janela)
             ranking.rodar(janela)
         elif menu.sair:
             sair = True

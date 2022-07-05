@@ -36,10 +36,8 @@ class Ranking:
             # TODO variável "voltar" para True (pois o jogador deseja
             # TODO retornar ao menu principal)
             if tecla == 'Return':
+                self.__apagar()
                 voltar = True
-            break
-
-        pass
 
     def __carregar_dados(self) -> None:
         """Lê os dados do ranking que estão contidos num arquivo json.
@@ -50,9 +48,9 @@ class Ranking:
         # TODO abrir arquivo json em "self.endereco_dados" em modo
         # TODO leitura e armazenar seu conteúdo no dicionário
         # TODO "self._dados".
-        with open(self._endereco_dados, 'r') as data:
+        with open('data\\ranking.json', 'r') as data:
             self._dados = json.load(data)
-        pass
+        
 
     def __desenhar(self, janela: GraphWin) -> None:
         """Desenha o ranking na janela do jogo.
@@ -62,12 +60,14 @@ class Ranking:
             executado.
         """
         # TODO Limpa a janela.
-        self.__apagar()
+        
         # TODO Ordena e desenha a lista do ranking. Desenhar nomes e
         # TODO quantidades de partidas ganhas.
-        ordem = sorted(self._dados.items(), key=lambda x: x[1], reverse=True)
-        for k,v in ordem:
-            self._rank.append(Text(Point(300, 300), '{}: {}'.format(k, v)))
+        ordem = sorted(self._dados, key=self._dados.get, reverse=True)
+        y = janela.height / 5
+        for v in ordem:
+            self._rank.append(Text(Point(janela.width / 2, y), '{}: {}'.format(v, self._dados[v])))
+            y += janela.height / 5
             self._rank[-1].setSize(20)
             self._rank[-1].draw(janela)
         pass
@@ -84,12 +84,12 @@ class Ranking:
         self.__carregar_dados()
         # TODO Modificar "self._dados" para registrar a nova vitória do
         # TODO jogador.
-        self._dados[nome_jogador] += 1
+        self._dados[nome_jogador] = +1
         # TODO Abrir o arquivo json em modo escrita e reescrever seu conteúdo
         # TODO de acordo com os dados atualizados.
-        with open(self._endereco_dados, 'w') as atualizar:
-            json.dumps(atualizar)
-        pass
+        with open('data\\ranking.json', 'w') as jsonfile:
+            json.dump(self._dados, jsonfile)
+        
 
     def __apagar(self) -> None:
         for i in range(len(self._rank)):
