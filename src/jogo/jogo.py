@@ -5,6 +5,7 @@ from src.jogo.elementos.bola import Bola
 from src.jogo.jogador.jogador import Jogador
 from src.jogo.elementos.campo import Campo
 from src.jogo.elementos.placar import Placar
+from src.ranking.ranking import Ranking
 from src.menu.menu import Menu
 import time
 
