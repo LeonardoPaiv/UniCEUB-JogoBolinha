@@ -64,10 +64,10 @@ class Ranking:
         # TODO Ordena e desenha a lista do ranking. Desenhar nomes e
         # TODO quantidades de partidas ganhas.
         ordem = sorted(self._dados, key=self._dados.get, reverse=True)
-        y = janela.height / 5
+        y = janela.height / 10
         for v in ordem:
             self._rank.append(Text(Point(janela.width / 2, y), '{}: {}'.format(v, self._dados[v])))
-            y += janela.height / 5
+            y += 50
             self._rank[-1].setSize(20)
             self._rank[-1].draw(janela)
         pass
